@@ -27,6 +27,7 @@
       <ul class="nav-links" id="nav-links" role="list">
         <li><a href="#services">Services</a></li>
         <li><a href="#forms">Resources</a></li>
+        <li><a href="#upload">Upload</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -112,6 +113,86 @@
           <p>Trade partner onboarding for the Designer Express program. Reducing lead times by up to two weeks is possible through this program.</p>
           <span class="form-card-arrow">Open Form &rarr;</span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FILE UPLOAD ===== -->
+  <section id="upload" aria-labelledby="upload-heading">
+    <div class="section-inner">
+      <header class="section-head">
+        <p class="section-label">Send Files</p>
+        <h2 id="upload-heading">Submit Drawings<br>&amp; Documents</h2>
+      </header>
+
+      <div class="upload-card">
+        <p class="upload-intro">Upload PDF drawings, elevations, or order documents directly to CDS. Files are saved securely to our team's OneDrive and you will receive a confirmation email.</p>
+
+        <!-- Power Automate upload form
+             ACTION REQUIRED: Replace YOUR_POWER_AUTOMATE_URL in js/main.js
+             with the HTTP POST URL from your Power Automate flow.
+             See the setup guide provided with this file. -->
+        <form id="upload-form" novalidate>
+          <div class="upload-fields">
+            <div class="field">
+              <label for="uf-name">Your Name</label>
+              <input type="text" id="uf-name" name="senderName" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="uf-company">Company / Dealership</label>
+              <input type="text" id="uf-company" name="senderCompany" required autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="uf-email">Your Email</label>
+              <input type="email" id="uf-email" name="senderEmail" required autocomplete="email" />
+            </div>
+            <div class="field field--full">
+              <label for="uf-notes">Notes <span class="field-optional">(optional)</span></label>
+              <textarea id="uf-notes" name="notes" rows="3" placeholder="Project name, order number, or any special instructions…"></textarea>
+            </div>
+          </div>
+
+          <div class="drop-zone" id="drop-zone" role="button" tabindex="0"
+               aria-label="Drop a PDF here or click to browse files">
+            <input type="file" id="uf-file" name="file" accept=".pdf,application/pdf"
+                   class="drop-input" aria-label="Choose PDF file" />
+            <div class="drop-idle" id="drop-idle">
+              <div class="drop-icon" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="drop-prompt">Drag &amp; drop a PDF here</p>
+              <p class="drop-or">or</p>
+              <span class="btn btn-ghost btn-sm" aria-hidden="true">Browse Files</span>
+              <p class="drop-limit">PDF only &middot; max 20 MB</p>
+            </div>
+            <div class="drop-chosen" id="drop-chosen" hidden>
+              <div class="drop-file-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                </svg>
+              </div>
+              <div class="drop-file-info">
+                <p class="drop-file-name" id="drop-file-name">filename.pdf</p>
+                <p class="drop-file-size" id="drop-file-size">0 KB</p>
+              </div>
+              <button type="button" class="drop-clear" id="drop-clear"
+                      aria-label="Remove selected file">&times;</button>
+            </div>
+          </div>
+
+          <div class="upload-footer">
+            <button type="submit" class="btn btn-dark" id="uf-submit" disabled>Send to CDS</button>
+            <p class="form-status" id="upload-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -243,6 +324,7 @@
       <nav class="footer-nav" aria-label="Footer navigation">
         <a href="#services">Services</a>
         <a href="#forms">Resources</a>
+        <a href="#upload">Upload</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
         <a href="http://calendly.com/pnfcds" target="_blank" rel="noopener noreferrer">Schedule</a>
