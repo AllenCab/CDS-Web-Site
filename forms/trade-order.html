@@ -1,0 +1,1708 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plain & Fancy Trade Partner - Estimate / Order / Designer Express Ordering Process</title>
+    <style>
+        :root {
+            --ink: #2f2a22;
+            --paper: #fbfaf7;
+            --line: #d8d0bf;
+            --band-start: #445332;
+            --band-mid: #5d7343;
+            --band-end: #769259;
+            --accent: #5d7343;
+            --soft: #e8efdf;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 85% 10%, rgba(93, 115, 67, 0.14), transparent 40%),
+                linear-gradient(170deg, #f1f4ec 0%, #fbfaf7 45%, #f2f6ec 100%);
+            color: var(--ink);
+            font-family: "Cormorant Garamond", "Garamond", "Baskerville", "Times New Roman", serif;
+            line-height: 1.35;
+            padding: 20px 14px;
+        }
+
+        .agreement {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 14px 30px rgba(33, 26, 18, 0.12);
+        }
+
+        .top {
+            padding: 5px 32px 4px;
+            background: linear-gradient(180deg, #fffefb 0%, #edf3e5 100%);
+            border-bottom: 1px solid var(--line);
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-layout {
+            display: grid;
+            grid-template-columns: 80% 20%;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .top-copy {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .logo-wrap {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .logo-wrap img,
+        .logo-wrap svg {
+            width: min(144px, 100%);
+            height: auto;
+        }
+
+        .title {
+            text-align: left;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: clamp(0.95rem, 0.88rem + 0.4vw, 1.25rem);
+            margin: 0 0 1px;
+            color: #3f3526;
+        }
+
+        .subtitle {
+            text-align: left;
+            margin: 0;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            color: #4f5f3b;
+            font-size: 0.72rem;
+            letter-spacing: 0.35px;
+        }
+
+        .doc-body {
+            padding: 12px 14px 14px;
+            display: grid;
+            gap: 9px;
+        }
+
+        .band {
+            background: linear-gradient(90deg, var(--band-start), var(--band-mid) 52%, var(--band-end));
+            color: #ffffff;
+            padding: 5px 9px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.66rem;
+            font-weight: 600;
+            box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.22);
+        }
+
+        .section {
+            border: 1px solid #e3dbcc;
+            border-radius: 8px;
+            background: #fffdf8;
+            padding: 9px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px 10px;
+        }
+
+        .field {
+            display: grid;
+            gap: 2px;
+        }
+
+        .field label {
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.65px;
+            text-transform: uppercase;
+            color: #6e5e43;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 14px;
+        }
+
+        .product-line-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .product-line-column {
+            display: grid;
+            gap: 7px;
+            align-content: start;
+        }
+
+        .option-stack {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #6e5e43;
+        }
+
+        .service-desc {
+            display: block;
+            font-size: 0.5rem;
+            text-transform: none;
+            letter-spacing: 0.2px;
+            line-height: 1.35;
+            color: #6e5e43;
+            margin-top: 1px;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+            accent-color: #5d7343;
+        }
+
+        .sub-options {
+            border: 1px solid #dccfb9;
+            border-radius: 6px;
+            padding: 7px;
+            background: #fffdf8;
+            display: grid;
+            gap: 6px;
+        }
+
+        .sub-options.disabled {
+            opacity: 0.55;
+        }
+
+        .line {
+            min-height: 21px;
+            border: 1px solid #d9cfbe;
+            border-radius: 6px;
+            background: #fffcf6;
+            padding: 2px 6px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.25;
+            cursor: text;
+            white-space: pre-wrap;
+        }
+
+        .select-field {
+            min-height: 21px;
+            height: 21px;
+            border: 1px solid #d9cfbe;
+            border-radius: 6px;
+            background: #fffcf6;
+            padding: 2px 6px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.25;
+            color: #2f2a22;
+        }
+
+        .select-field.placeholder {
+            font-size: 0.62rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .select-field option[value=""] {
+            font-size: 0.62rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .select-field option:not([value=""]) {
+            font-size: 0.82rem;
+            color: #2f2a22;
+            font-style: normal;
+        }
+
+        .select-field:focus {
+            outline: none;
+            box-shadow: inset 0 0 0 1px rgba(68, 83, 50, 0.35);
+            background: #fffefb;
+        }
+
+        .select-field optgroup {
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #445332;
+        }
+
+        .select-field option[data-type="standard"] {
+            background-color: #d4edda;
+            color: #1a4620;
+        }
+
+        .select-field option[data-type="available"] {
+            background-color: #fff3cd;
+            color: #664d03;
+        }
+
+        .line.tall {
+            min-height: 48px;
+        }
+
+        .sig-line {
+            min-height: 24px;
+            border-bottom: 1px solid #b9aa8d;
+            padding: 2px 2px 1px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.25;
+            cursor: text;
+            white-space: pre-wrap;
+        }
+
+        .line[contenteditable="true"],
+        .sig-line[contenteditable="true"] {
+            outline: none;
+        }
+
+        .line[contenteditable="true"]:focus,
+        .sig-line[contenteditable="true"]:focus {
+            box-shadow: inset 0 0 0 1px rgba(68, 83, 50, 0.35);
+            background: #fffefb;
+        }
+
+        .copy {
+            margin: 0;
+            font-family: "Dubai", "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        th,
+        td {
+            border: 1px solid #dccfb9;
+            padding: 6px 8px;
+            vertical-align: middle;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.65px;
+        }
+
+        th {
+            text-align: left;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.67rem;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            background: var(--soft);
+            color: #5e5139;
+        }
+
+        .sign-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin-top: 3px;
+        }
+
+        .signature {
+            border: 1px solid #d9cfbe;
+            border-radius: 6px;
+            background: #fffefb;
+            padding: 7px;
+            display: grid;
+            gap: 4px;
+        }
+
+        .sig-note {
+            font-size: 0.7rem;
+            color: #6d5c40;
+            margin: 0;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-area {
+            padding: 8px 14px 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: #f9f8f5;
+            border-top: 1px solid var(--line);
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit {
+            background: linear-gradient(90deg, var(--band-start), var(--band-mid) 52%, var(--band-end));
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(68, 83, 50, 0.2);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            box-shadow: 0 4px 10px rgba(68, 83, 50, 0.35);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-reset {
+            background: #e8e4d8;
+            color: #5d5e52;
+        }
+
+        .btn-reset:hover:not(:disabled) {
+            background: #dcd7c8;
+        }
+
+        .btn-export {
+            background: #c9d4b5;
+            color: #405330;
+            border: 1px solid #b0be96;
+        }
+
+        .btn-export:hover:not(:disabled) {
+            background: #bcc9a5;
+        }
+
+        .form-locked .line,
+        .form-locked .sig-line {
+            background: #f0ede5;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .submit-message {
+            padding: 10px 14px;
+            background: #e8f5e8;
+            border: 1px solid #a8d5a8;
+            border-radius: 6px;
+            color: #2d5a2d;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        .submit-message.show {
+            display: block;
+        }
+
+        .fallback-message {
+            display: none;
+            padding: 0 14px 10px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.78rem;
+            color: #5b503b;
+            text-align: center;
+        }
+
+        .fallback-message.show {
+            display: block;
+        }
+
+        .fallback-message a {
+            color: #445332;
+            font-weight: 600;
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 5px 12px 6px;
+            font-family: "Dubai", "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 9pt;
+            letter-spacing: 0.2px;
+            color: #536541;
+            background: linear-gradient(180deg, #eef4e5 0%, #e5ecd9 100%);
+            text-align: center;
+        }
+
+        @media screen and (max-width: 760px) {
+            .top {
+                padding: 14px 12px 10px;
+                min-height: auto;
+            }
+
+            .top-layout {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .title,
+            .subtitle {
+                text-align: center;
+            }
+
+            .logo-wrap {
+                justify-content: center;
+            }
+
+            .doc-body {
+                padding: 10px;
+            }
+
+            .two-col,
+            .sign-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-line-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page {
+                size: letter;
+                margin: 0.25in 0.3in;
+            }
+
+            body {
+                padding: 0;
+                margin: 0;
+                background: #ffffff;
+                font-size: 9pt;
+                zoom: 95%;
+            }
+
+            [style*="height:44px"] { display: none !important; }
+
+            .agreement {
+                margin-top: 0;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .top {
+                min-height: 66px;
+                padding: 4px 24px 3px;
+            }
+
+            .doc-body {
+                gap: 6px;
+                padding: 10px 11px 10px;
+            }
+
+            .section {
+                padding: 7px;
+                gap: 5px;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            th,
+            td {
+                padding: 5px 6px;
+            }
+
+            .line {
+                min-height: 19px;
+                padding: 1px 5px;
+                font-size: 0.8rem;
+            }
+
+            .sig-line {
+                min-height: 22px;
+                padding: 1px 2px 1px;
+            }
+
+            .footer {
+                padding: 4px 10px 5px;
+            }
+
+            .band,
+            .footer,
+            .top {
+                background-clip: border-box;
+            }
+
+            .submit-area,
+            .submit-message {
+                display: none;
+            }
+        }
+    
+        /* Back-nav to main site */
+        .back-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            background: rgba(44,58,30,0.97);
+            display: flex;
+            align-items: center;
+            height: 44px;
+            padding: 0 1.5rem;
+        }
+        .back-nav a {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: rgba(255,255,255,0.82);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .back-nav a:hover { color: #fff; }
+        @media print { .back-nav { display: none; } }
+    </style>
+</head>
+<body>
+    <nav class="back-nav"><a href="../index.html">&lsaquo;&nbsp;CDS&nbsp;Home</a></nav>
+    <div style="height:44px"></div>
+    <form id="agreementForm">
+        <main class="agreement">
+            <header class="top">
+                <div class="top-layout">
+                    <div class="top-copy">
+                        <h1 class="title">Plain & Fancy Trade Partner</h1>
+                        <h2 class="title" style="font-size:1em;margin-top:2px;font-weight:500;">Estimate / Order / Designer Express Ordering Process</h2>
+                        <p class="subtitle">A clear design and ordering process for clean orders and a design that meets or exceeds your expectations.</p>
+                    </div>
+                    <div class="logo-wrap">
+                        <img src="../assets/logo.svg" alt="CDS Cabinet Dealer Services" />
+                    </div>
+                </div>
+            </header>
+
+            <section class="doc-body">
+                <div class="section">
+                    <div class="band">Client Details</div>
+                    <div class="two-col">
+                        <div class="field"><label>Client Name</label><div class="line" name="client_name"></div></div>
+                        <div class="field"><label>Project Name</label><div class="line" name="project_name"></div></div>
+                        <div class="field"><label>Project Address</label><div class="line" name="project_address"></div></div>
+                        <div class="field"><label>City / State / ZIP</label><div class="line" name="city_state_zip"></div></div>
+                        <div class="field"><label>Primary Phone</label><div class="line" name="primary_phone"></div></div>
+                        <div class="field"><label>Email</label><div class="line" name="email"></div></div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="band">Services</div>
+                    <div style="display: grid; gap: 7px;">
+                        <label class="checkbox-option"><input type="checkbox" name="services" value="cost_estimate" data-label="Cost Estimate" /><span>Cost Estimate<span class="service-desc">We price your design or list of cabinets with the global parameters you provide using the factory's AdvanceWare application. Very small kitchens with clean presentations can be quoted in about an hour. Complete homes can take more than 16 hours. The rate for this quoting service is the same as the factory rate of $75.00 per hour.</span></span></label>
+                        <label class="checkbox-option"><input type="checkbox" name="services" value="your_design_our_order" data-label="Your Design, Our Order Documents" /><span>Your Design, Our Order Documents<span class="service-desc">We order the cabinets we previously priced. We are cc'd on all correspondence. We interact with you and the factory, resolve all order issues, interact with engineering, and proofread the acknowledgment, confirming everything with you along the way. The rate for Pricing then Ordering is 1.5% of the list price minus what was paid for the pricing service.</span></span></label>
+                        <label class="checkbox-option"><input type="checkbox" name="services" value="designer_express" data-label="Designer Express Ordering Process" /><span>Designer Express Ordering Process<span class="service-desc">Plain &amp; Fancy has an ordering process called Designer Express. The process requires very clean floor plans, very clean elevations, plan numbering that matches the order numbering, clean appliance specifications, and use of the AdvanceWare cloud based 2Configure application. Tedious for sure. We'll clean up the presentation of your design, perfect the nomenclature on the plans, sequence everything, group cabinets into sub-orders based on varying globals, and submit the order on your behalf &ndash; often we'll clear up questions and discrepancies preventing expensive oversights along the way. This process shortens the lead time by up to two weeks and earns a 5% credit. DE orders include a factory acknowledgement but not an opportunity to make changes. DE orders by CDS cost you nothing out of pocket. We save you both ordering time and production time in exchange for the 5% discount. PLEASE NOTE: to decrease the factory's order processing time effectively this DE option must be invoked early. This DE process works best when all custom items are resolved before order is submitted.</span></span></label>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="band">Product Line</div>
+                    <div class="product-line-columns">
+                        <div class="product-line-column">
+                            <label class="checkbox-option"><input type="checkbox" name="product_line" value="face_frame" data-label="Face Frame" id="faceFrameToggle" />Face Frame</label>
+                            <div class="sub-options" id="faceFrameOptions">
+                                <label class="field" style="gap: 6px;">
+                                    <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Face Frame Type</span>
+                                    <span class="option-stack">
+                                        <span class="checkbox-option"><input type="checkbox" name="face_frame_style" value="3_4_frame" data-label="3/4 Frame" />3/4 Frame</span>
+                                        <span class="checkbox-option"><input type="checkbox" name="face_frame_style" value="5_4_frame" data-label="5/4 Frame" />5/4 Frame</span>
+                                    </span>
+                                </label>
+                                <label class="field" style="gap: 6px;">
+                                    <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Interior</span>
+                                    <span class="option-stack">
+                                        <span class="checkbox-option"><input type="checkbox" name="face_frame_interior" value="plywood" data-label="Plywood" />Plywood</span>
+                                        <span class="checkbox-option"><input type="checkbox" name="face_frame_interior" value="melamine" data-label="Melamine" />Melamine</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="product-line-column">
+                            <label class="checkbox-option"><input type="checkbox" name="product_line" value="frameless" data-label="Frameless" id="framelessToggle" />Frameless</label>
+                            <div class="sub-options" id="framelessOptions">
+                                <label class="field" style="gap: 6px;">
+                                    <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Frameless Interior</span>
+                                    <span class="option-stack">
+                                        <span class="checkbox-option"><input type="checkbox" name="frameless_interior" value="plywood" data-label="Plywood" />Plywood</span>
+                                        <span class="checkbox-option"><input type="checkbox" name="frameless_interior" value="white" data-label="White Melamine" />White Melamine</span>
+                                        <span class="checkbox-option"><input type="checkbox" name="frameless_interior" value="gray" data-label="Gray Melamine" />Gray Melamine</span>
+                                        <span class="checkbox-option"><input type="checkbox" name="frameless_interior" value="wood_grain" data-label="Wood Grain Melamine" />Wood Grain Melamine</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="band">Product Specifications</div>
+                    <div class="two-col">
+                        <div class="field"><label>Wood Specie</label>
+                            <select class="select-field" name="wood_specie" id="woodSpecieSelect">
+                                <option value="">Select Wood Specie</option>
+                                <option value="Alder - Knotty">Alder - Knotty</option>
+                                <option value="Alder - Standard">Alder - Standard</option>
+                                <option value="Cherry">Cherry</option>
+                                <option value="Maple">Maple</option>
+                                <option value="Maple - Hard">Maple - Hard</option>
+                                <option value="Red Birch">Red Birch</option>
+                                <option value="Red Oak">Red Oak</option>
+                                <option value="Red Oak - Rift Cut">Red Oak - Rift Cut</option>
+                                <option value="Walnut">Walnut</option>
+                                <option value="White Oak">White Oak</option>
+                                <option value="White Oak - Quarter Sawn">White Oak - Quarter Sawn</option>
+                                <option value="White Oak - Rift Cut">White Oak - Rift Cut</option>
+                            </select>
+                        </div>
+                        <div class="field"><label>Finish</label>
+                            <select class="select-field" name="finish" id="finishDropdown">
+                                <option value="">Select Wood Specie First</option>
+                            </select>
+                        </div>
+                        <div class="field"><label>Sheen</label>
+                            <select class="select-field" name="sheen" id="sheenDropdown">
+                                <option value="">Select Wood Specie and Finish First</option>
+                            </select>
+                        </div>
+                        <div class="field"><label>Wall Door</label>
+                            <select class="select-field" name="wall_door">
+                                <option value="">Select Door Style</option>
+                                <option value="Abbey">Abbey</option>
+                                <option value="Abbey w/ Bevel Trim">Abbey w/ Bevel Trim</option>
+                                <option value="Abbey w/ P6 Panel">Abbey w/ P6 Panel</option>
+                                <option value="Abbey w/ Square Aluminum Trim">Abbey w/ Square Aluminum Trim</option>
+                                <option value="Abbey 3">Abbey 3</option>
+                                <option value="Abbey 3 w/ Bevel Trim">Abbey 3 w/ Bevel Trim</option>
+                                <option value="Abbey 3 w/ P6 Panel">Abbey 3 w/ P6 Panel</option>
+                                <option value="Abbey 3 w/ Square Aluminum Trim">Abbey 3 w/ Square Aluminum Trim</option>
+                                <option value="Acela MDF (O.S.)">Acela MDF (O.S.)</option>
+                                <option value="Alexandria 5/4 (O.S.)">Alexandria 5/4 (O.S.)</option>
+                                <option value="Apollo">Apollo</option>
+                                <option value="Austere">Austere</option>
+                                <option value="Austere 3">Austere 3</option>
+                                <option value="Bayville 5/4 (O.S.)">Bayville 5/4 (O.S.)</option>
+                                <option value="Belmont">Belmont</option>
+                                <option value="Belmont 3">Belmont 3</option>
+                                <option value="Brookside 5/4">Brookside 5/4</option>
+                                <option value="Catalina 5/4 (O.S.)">Catalina 5/4 (O.S.)</option>
+                                <option value="Chatham 5/4">Chatham 5/4</option>
+                                <option value="Closed Louver (O.S.)">Closed Louver (O.S.)</option>
+                                <option value="Closed Louver Double Panel">Closed Louver Double Panel</option>
+                                <option value="Contempo">Contempo</option>
+                                <option value="Dorchester">Dorchester</option>
+                                <option value="Dorchester 3">Dorchester 3</option>
+                                <option value="Duke">Duke</option>
+                                <option value="Duke Special">Duke Special</option>
+                                <option value="Element Aluminum Doors (O.S.)">Element Aluminum Doors (O.S.)</option>
+                                <option value="Fairhaven">Fairhaven</option>
+                                <option value="Foundry">Foundry</option>
+                                <option value="Foundry 3">Foundry 3</option>
+                                <option value="Geneva">Geneva</option>
+                                <option value="Gemini">Gemini</option>
+                                <option value="Illusion (O.S.)">Illusion (O.S.)</option>
+                                <option value="Ironmaster">Ironmaster</option>
+                                <option value="Kent (O.S.)">Kent (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF (O.S.)">Kent 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 3 (O.S.)">Kent 3 (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF (O.S.)">Kent 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 5/4 (O.S.)">Kent 5/4 (O.S.)</option>
+                                <option value="Kent 3 5/4 (O.S.)">Kent 3 5/4 (O.S.)</option>
+                                <option value="Kent Raised Panel (O.S.)">Kent Raised Panel (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent 3 Raised Panel (O.S.)">Kent 3 Raised Panel (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent Slab w/ Applied Moulding (O.S.)">Kent Slab w/ Applied Moulding (O.S.)</option>
+                                <option value="Liberty (O.S.)">Liberty (O.S.)</option>
+                                <option value="Linea 1.5">Linea 1.5</option>
+                                <option value="Linea 3">Linea 3</option>
+                                <option value="Meadowbrook 5/4">Meadowbrook 5/4</option>
+                                <option value="Millbrook 5/4">Millbrook 5/4</option>
+                                <option value="Millbrook II 5/4">Millbrook II 5/4</option>
+                                <option value="Mirage 5-Pc MDF (O.S.)">Mirage 5-Pc MDF (O.S.)</option>
+                                <option value="Montauk 5/4">Montauk 5/4</option>
+                                <option value="Newport">Newport</option>
+                                <option value="Newport (O.S.)">Newport (O.S.)</option>
+                                <option value="Newport 5-Pc MDF (O.S.)">Newport 5-Pc MDF (O.S.)</option>
+                                <option value="Newport w/ P6 Panel">Newport w/ P6 Panel</option>
+                                <option value="Presidential">Presidential</option>
+                                <option value="Presidential 5/4">Presidential 5/4</option>
+                                <option value="Provence 5/4 (O.S.)">Provence 5/4 (O.S.)</option>
+                                <option value="Quaker">Quaker</option>
+                                <option value="Quaker (O.S.)">Quaker (O.S.)</option>
+                                <option value="Quaker 3">Quaker 3</option>
+                                <option value="Quaker 3 (O.S.)">Quaker 3 (O.S.)</option>
+                                <option value="Quaker 3 5/4 (O.S.)">Quaker 3 5/4 (O.S.)</option>
+                                <option value="Quaker 5/4 (O.S.)">Quaker 5/4 (O.S.)</option>
+                                <option value="Raya (O.S.)">Raya (O.S.)</option>
+                                <option value="Shaker">Shaker</option>
+                                <option value="Shaker (O.S.)">Shaker (O.S.)</option>
+                                <option value="Shaker 1-Pc MDRF (O.S.)">Shaker 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 5/4">Shaker 5/4</option>
+                                <option value="Shaker 3">Shaker 3</option>
+                                <option value="Shaker 3 (O.S.)">Shaker 3 (O.S.)</option>
+                                <option value="Shaker 3 1-Pc MDRF (O.S.)">Shaker 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 3 5/4 (O.S.)">Shaker 3 5/4 (O.S.)</option>
+                                <option value="Shaker 5 PC MDF">Shaker 5 PC MDF</option>
+                                <option value="Slab">Slab</option>
+                                <option value="Slab 1-Pc MDRF (O.S.)">Slab 1-Pc MDRF (O.S.)</option>
+                                <option value="Soho (O.S.)">Soho (O.S.)</option>
+                                <option value="Special">Special</option>
+                                <option value="Special Miter">Special Miter</option>
+                                <option value="Special Miter 5/4 (O.S.)">Special Miter 5/4 (O.S.)</option>
+                                <option value="Special Mortise &amp; Tenon">Special Mortise &amp; Tenon</option>
+                                <option value="Special Mortise &amp; Tenon 5/4 (O.S.)">Special Mortise &amp; Tenon 5/4 (O.S.)</option>
+                                <option value="Stainless Steel Key West (O.S.)">Stainless Steel Key West (O.S.)</option>
+                                <option value="Stainless Steel Slab (O.S.)">Stainless Steel Slab (O.S.)</option>
+                                <option value="Statesman 5/4 (O.S.)">Statesman 5/4 (O.S.)</option>
+                                <option value="Taliesan (O.S.)">Taliesan (O.S.)</option>
+                                <option value="Transition">Transition</option>
+                                <option value="Transition 1 PC MDF">Transition 1 PC MDF</option>
+                                <option value="Transition 1 PC MDF 5/4">Transition 1 PC MDF 5/4</option>
+                                <option value="Transition 3">Transition 3</option>
+                                <option value="Transition 3 1 PC MDF">Transition 3 1 PC MDF</option>
+                                <option value="Transition 3 1 PC MDF 5/4">Transition 3 1 PC MDF 5/4</option>
+                                <option value="Vesta 5/4">Vesta 5/4</option>
+                                <option value="Vienna (O.S.)">Vienna (O.S.)</option>
+                                <option value="Vintage">Vintage</option>
+                                <option value="Vintage 3">Vintage 3</option>
+                                <option value="Vintage 3 (O.S.)">Vintage 3 (O.S.)</option>
+                                <option value="Vintage 1-PC MDRF (O.S.)">Vintage 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 3 1-PC MDRF (O.S.)">Vintage 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 5/4 (O.S.)">Vintage 5/4 (O.S.)</option>
+                                <option value="Vintage 3 5/4 (O.S.)">Vintage 3 5/4 (O.S.)</option>
+                                <option value="Vintage 5-PC MDRF (O.S.)">Vintage 5-PC MDRF (O.S.)</option>
+                                <option value="Vogue">Vogue</option>
+                                <option value="Vogue (O.S.)">Vogue (O.S.)</option>
+                                <option value="Vogue 1-PC MDRF (O.S.)">Vogue 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3">Vogue 3</option>
+                                <option value="Vogue 3 (O.S.)">Vogue 3 (O.S.)</option>
+                                <option value="Vogue 3 1-PC MDRF (O.S.)">Vogue 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3 w/ P6 Panel">Vogue 3 w/ P6 Panel</option>
+                                <option value="Vogue 3 w/ P6 Panel (O.S.)">Vogue 3 w/ P6 Panel (O.S.)</option>
+                                <option value="Vogue 5/4 (O.S.)">Vogue 5/4 (O.S.)</option>
+                                <option value="Vogue 5-PC MDF (O.S.)">Vogue 5-PC MDF (O.S.)</option>
+                                <option value="Vogue w/ P6 Panel">Vogue w/ P6 Panel</option>
+                                <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
+                            </select>
+                        </div>
+                        <div class="field"><label>Base Door</label>
+                            <select class="select-field" name="base_door">
+                                <option value="">Select Door Style</option>
+                                <option value="Abbey">Abbey</option>
+                                <option value="Abbey w/ Bevel Trim">Abbey w/ Bevel Trim</option>
+                                <option value="Abbey w/ P6 Panel">Abbey w/ P6 Panel</option>
+                                <option value="Abbey w/ Square Aluminum Trim">Abbey w/ Square Aluminum Trim</option>
+                                <option value="Abbey 3">Abbey 3</option>
+                                <option value="Abbey 3 w/ Bevel Trim">Abbey 3 w/ Bevel Trim</option>
+                                <option value="Abbey 3 w/ P6 Panel">Abbey 3 w/ P6 Panel</option>
+                                <option value="Abbey 3 w/ Square Aluminum Trim">Abbey 3 w/ Square Aluminum Trim</option>
+                                <option value="Acela MDF (O.S.)">Acela MDF (O.S.)</option>
+                                <option value="Alexandria 5/4 (O.S.)">Alexandria 5/4 (O.S.)</option>
+                                <option value="Apollo">Apollo</option>
+                                <option value="Austere">Austere</option>
+                                <option value="Austere 3">Austere 3</option>
+                                <option value="Bayville 5/4 (O.S.)">Bayville 5/4 (O.S.)</option>
+                                <option value="Belmont">Belmont</option>
+                                <option value="Belmont 3">Belmont 3</option>
+                                <option value="Brookside 5/4">Brookside 5/4</option>
+                                <option value="Catalina 5/4 (O.S.)">Catalina 5/4 (O.S.)</option>
+                                <option value="Chatham 5/4">Chatham 5/4</option>
+                                <option value="Closed Louver (O.S.)">Closed Louver (O.S.)</option>
+                                <option value="Closed Louver Double Panel">Closed Louver Double Panel</option>
+                                <option value="Contempo">Contempo</option>
+                                <option value="Dorchester">Dorchester</option>
+                                <option value="Dorchester 3">Dorchester 3</option>
+                                <option value="Duke">Duke</option>
+                                <option value="Duke Special">Duke Special</option>
+                                <option value="Element Aluminum Doors (O.S.)">Element Aluminum Doors (O.S.)</option>
+                                <option value="Fairhaven">Fairhaven</option>
+                                <option value="Foundry">Foundry</option>
+                                <option value="Foundry 3">Foundry 3</option>
+                                <option value="Geneva">Geneva</option>
+                                <option value="Gemini">Gemini</option>
+                                <option value="Illusion (O.S.)">Illusion (O.S.)</option>
+                                <option value="Ironmaster">Ironmaster</option>
+                                <option value="Kent (O.S.)">Kent (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF (O.S.)">Kent 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 3 (O.S.)">Kent 3 (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF (O.S.)">Kent 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 5/4 (O.S.)">Kent 5/4 (O.S.)</option>
+                                <option value="Kent 3 5/4 (O.S.)">Kent 3 5/4 (O.S.)</option>
+                                <option value="Kent Raised Panel (O.S.)">Kent Raised Panel (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent 3 Raised Panel (O.S.)">Kent 3 Raised Panel (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent Slab w/ Applied Moulding (O.S.)">Kent Slab w/ Applied Moulding (O.S.)</option>
+                                <option value="Liberty (O.S.)">Liberty (O.S.)</option>
+                                <option value="Linea 1.5">Linea 1.5</option>
+                                <option value="Linea 3">Linea 3</option>
+                                <option value="Meadowbrook 5/4">Meadowbrook 5/4</option>
+                                <option value="Millbrook 5/4">Millbrook 5/4</option>
+                                <option value="Millbrook II 5/4">Millbrook II 5/4</option>
+                                <option value="Mirage 5-Pc MDF (O.S.)">Mirage 5-Pc MDF (O.S.)</option>
+                                <option value="Montauk 5/4">Montauk 5/4</option>
+                                <option value="Newport">Newport</option>
+                                <option value="Newport (O.S.)">Newport (O.S.)</option>
+                                <option value="Newport 5-Pc MDF (O.S.)">Newport 5-Pc MDF (O.S.)</option>
+                                <option value="Newport w/ P6 Panel">Newport w/ P6 Panel</option>
+                                <option value="Presidential">Presidential</option>
+                                <option value="Presidential 5/4">Presidential 5/4</option>
+                                <option value="Provence 5/4 (O.S.)">Provence 5/4 (O.S.)</option>
+                                <option value="Quaker">Quaker</option>
+                                <option value="Quaker (O.S.)">Quaker (O.S.)</option>
+                                <option value="Quaker 3">Quaker 3</option>
+                                <option value="Quaker 3 (O.S.)">Quaker 3 (O.S.)</option>
+                                <option value="Quaker 3 5/4 (O.S.)">Quaker 3 5/4 (O.S.)</option>
+                                <option value="Quaker 5/4 (O.S.)">Quaker 5/4 (O.S.)</option>
+                                <option value="Raya (O.S.)">Raya (O.S.)</option>
+                                <option value="Shaker">Shaker</option>
+                                <option value="Shaker (O.S.)">Shaker (O.S.)</option>
+                                <option value="Shaker 1-Pc MDRF (O.S.)">Shaker 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 5/4">Shaker 5/4</option>
+                                <option value="Shaker 3">Shaker 3</option>
+                                <option value="Shaker 3 (O.S.)">Shaker 3 (O.S.)</option>
+                                <option value="Shaker 3 1-Pc MDRF (O.S.)">Shaker 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 3 5/4 (O.S.)">Shaker 3 5/4 (O.S.)</option>
+                                <option value="Shaker 5 PC MDF">Shaker 5 PC MDF</option>
+                                <option value="Slab">Slab</option>
+                                <option value="Slab 1-Pc MDRF (O.S.)">Slab 1-Pc MDRF (O.S.)</option>
+                                <option value="Soho (O.S.)">Soho (O.S.)</option>
+                                <option value="Special">Special</option>
+                                <option value="Special Miter">Special Miter</option>
+                                <option value="Special Miter 5/4 (O.S.)">Special Miter 5/4 (O.S.)</option>
+                                <option value="Special Mortise &amp; Tenon">Special Mortise &amp; Tenon</option>
+                                <option value="Special Mortise &amp; Tenon 5/4 (O.S.)">Special Mortise &amp; Tenon 5/4 (O.S.)</option>
+                                <option value="Stainless Steel Key West (O.S.)">Stainless Steel Key West (O.S.)</option>
+                                <option value="Stainless Steel Slab (O.S.)">Stainless Steel Slab (O.S.)</option>
+                                <option value="Statesman 5/4 (O.S.)">Statesman 5/4 (O.S.)</option>
+                                <option value="Taliesan (O.S.)">Taliesan (O.S.)</option>
+                                <option value="Transition">Transition</option>
+                                <option value="Transition 1 PC MDF">Transition 1 PC MDF</option>
+                                <option value="Transition 1 PC MDF 5/4">Transition 1 PC MDF 5/4</option>
+                                <option value="Transition 3">Transition 3</option>
+                                <option value="Transition 3 1 PC MDF">Transition 3 1 PC MDF</option>
+                                <option value="Transition 3 1 PC MDF 5/4">Transition 3 1 PC MDF 5/4</option>
+                                <option value="Vesta 5/4">Vesta 5/4</option>
+                                <option value="Vienna (O.S.)">Vienna (O.S.)</option>
+                                <option value="Vintage">Vintage</option>
+                                <option value="Vintage 3">Vintage 3</option>
+                                <option value="Vintage 3 (O.S.)">Vintage 3 (O.S.)</option>
+                                <option value="Vintage 1-PC MDRF (O.S.)">Vintage 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 3 1-PC MDRF (O.S.)">Vintage 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 5/4 (O.S.)">Vintage 5/4 (O.S.)</option>
+                                <option value="Vintage 3 5/4 (O.S.)">Vintage 3 5/4 (O.S.)</option>
+                                <option value="Vintage 5-PC MDRF (O.S.)">Vintage 5-PC MDRF (O.S.)</option>
+                                <option value="Vogue">Vogue</option>
+                                <option value="Vogue (O.S.)">Vogue (O.S.)</option>
+                                <option value="Vogue 1-PC MDRF (O.S.)">Vogue 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3">Vogue 3</option>
+                                <option value="Vogue 3 (O.S.)">Vogue 3 (O.S.)</option>
+                                <option value="Vogue 3 1-PC MDRF (O.S.)">Vogue 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3 w/ P6 Panel">Vogue 3 w/ P6 Panel</option>
+                                <option value="Vogue 3 w/ P6 Panel (O.S.)">Vogue 3 w/ P6 Panel (O.S.)</option>
+                                <option value="Vogue 5/4 (O.S.)">Vogue 5/4 (O.S.)</option>
+                                <option value="Vogue 5-PC MDF (O.S.)">Vogue 5-PC MDF (O.S.)</option>
+                                <option value="Vogue w/ P6 Panel">Vogue w/ P6 Panel</option>
+                                <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
+                            </select>
+                        </div>
+                        <div class="field"><label>Shallow Drawer</label>
+                            <select class="select-field" name="shallow_drawer">
+                                <option value="">Select Door Style</option>
+                                <option value="Abbey">Abbey</option>
+                                <option value="Abbey w/ Bevel Trim">Abbey w/ Bevel Trim</option>
+                                <option value="Abbey w/ P6 Panel">Abbey w/ P6 Panel</option>
+                                <option value="Abbey w/ Square Aluminum Trim">Abbey w/ Square Aluminum Trim</option>
+                                <option value="Abbey 3">Abbey 3</option>
+                                <option value="Abbey 3 w/ Bevel Trim">Abbey 3 w/ Bevel Trim</option>
+                                <option value="Abbey 3 w/ P6 Panel">Abbey 3 w/ P6 Panel</option>
+                                <option value="Abbey 3 w/ Square Aluminum Trim">Abbey 3 w/ Square Aluminum Trim</option>
+                                <option value="Acela MDF (O.S.)">Acela MDF (O.S.)</option>
+                                <option value="Alexandria 5/4 (O.S.)">Alexandria 5/4 (O.S.)</option>
+                                <option value="Apollo">Apollo</option>
+                                <option value="Austere">Austere</option>
+                                <option value="Austere 3">Austere 3</option>
+                                <option value="Bayville 5/4 (O.S.)">Bayville 5/4 (O.S.)</option>
+                                <option value="Belmont">Belmont</option>
+                                <option value="Belmont 3">Belmont 3</option>
+                                <option value="Brookside 5/4">Brookside 5/4</option>
+                                <option value="Catalina 5/4 (O.S.)">Catalina 5/4 (O.S.)</option>
+                                <option value="Chatham 5/4">Chatham 5/4</option>
+                                <option value="Closed Louver (O.S.)">Closed Louver (O.S.)</option>
+                                <option value="Closed Louver Double Panel">Closed Louver Double Panel</option>
+                                <option value="Contempo">Contempo</option>
+                                <option value="Dorchester">Dorchester</option>
+                                <option value="Dorchester 3">Dorchester 3</option>
+                                <option value="Duke">Duke</option>
+                                <option value="Duke Special">Duke Special</option>
+                                <option value="Element Aluminum Doors (O.S.)">Element Aluminum Doors (O.S.)</option>
+                                <option value="Fairhaven">Fairhaven</option>
+                                <option value="Foundry">Foundry</option>
+                                <option value="Foundry 3">Foundry 3</option>
+                                <option value="Geneva">Geneva</option>
+                                <option value="Gemini">Gemini</option>
+                                <option value="Illusion (O.S.)">Illusion (O.S.)</option>
+                                <option value="Ironmaster">Ironmaster</option>
+                                <option value="Kent (O.S.)">Kent (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF (O.S.)">Kent 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 3 (O.S.)">Kent 3 (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF (O.S.)">Kent 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 5/4 (O.S.)">Kent 5/4 (O.S.)</option>
+                                <option value="Kent 3 5/4 (O.S.)">Kent 3 5/4 (O.S.)</option>
+                                <option value="Kent Raised Panel (O.S.)">Kent Raised Panel (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent 3 Raised Panel (O.S.)">Kent 3 Raised Panel (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent Slab w/ Applied Moulding (O.S.)">Kent Slab w/ Applied Moulding (O.S.)</option>
+                                <option value="Liberty (O.S.)">Liberty (O.S.)</option>
+                                <option value="Linea 1.5">Linea 1.5</option>
+                                <option value="Linea 3">Linea 3</option>
+                                <option value="Meadowbrook 5/4">Meadowbrook 5/4</option>
+                                <option value="Millbrook 5/4">Millbrook 5/4</option>
+                                <option value="Millbrook II 5/4">Millbrook II 5/4</option>
+                                <option value="Mirage 5-Pc MDF (O.S.)">Mirage 5-Pc MDF (O.S.)</option>
+                                <option value="Montauk 5/4">Montauk 5/4</option>
+                                <option value="Newport">Newport</option>
+                                <option value="Newport (O.S.)">Newport (O.S.)</option>
+                                <option value="Newport 5-Pc MDF (O.S.)">Newport 5-Pc MDF (O.S.)</option>
+                                <option value="Newport w/ P6 Panel">Newport w/ P6 Panel</option>
+                                <option value="Presidential">Presidential</option>
+                                <option value="Presidential 5/4">Presidential 5/4</option>
+                                <option value="Provence 5/4 (O.S.)">Provence 5/4 (O.S.)</option>
+                                <option value="Quaker">Quaker</option>
+                                <option value="Quaker (O.S.)">Quaker (O.S.)</option>
+                                <option value="Quaker 3">Quaker 3</option>
+                                <option value="Quaker 3 (O.S.)">Quaker 3 (O.S.)</option>
+                                <option value="Quaker 3 5/4 (O.S.)">Quaker 3 5/4 (O.S.)</option>
+                                <option value="Quaker 5/4 (O.S.)">Quaker 5/4 (O.S.)</option>
+                                <option value="Raya (O.S.)">Raya (O.S.)</option>
+                                <option value="Shaker">Shaker</option>
+                                <option value="Shaker (O.S.)">Shaker (O.S.)</option>
+                                <option value="Shaker 1-Pc MDRF (O.S.)">Shaker 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 5/4">Shaker 5/4</option>
+                                <option value="Shaker 3">Shaker 3</option>
+                                <option value="Shaker 3 (O.S.)">Shaker 3 (O.S.)</option>
+                                <option value="Shaker 3 1-Pc MDRF (O.S.)">Shaker 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 3 5/4 (O.S.)">Shaker 3 5/4 (O.S.)</option>
+                                <option value="Shaker 5 PC MDF">Shaker 5 PC MDF</option>
+                                <option value="Slab">Slab</option>
+                                <option value="Slab 1-Pc MDRF (O.S.)">Slab 1-Pc MDRF (O.S.)</option>
+                                <option value="Soho (O.S.)">Soho (O.S.)</option>
+                                <option value="Special">Special</option>
+                                <option value="Special Miter">Special Miter</option>
+                                <option value="Special Miter 5/4 (O.S.)">Special Miter 5/4 (O.S.)</option>
+                                <option value="Special Mortise &amp; Tenon">Special Mortise &amp; Tenon</option>
+                                <option value="Special Mortise &amp; Tenon 5/4 (O.S.)">Special Mortise &amp; Tenon 5/4 (O.S.)</option>
+                                <option value="Stainless Steel Key West (O.S.)">Stainless Steel Key West (O.S.)</option>
+                                <option value="Stainless Steel Slab (O.S.)">Stainless Steel Slab (O.S.)</option>
+                                <option value="Statesman 5/4 (O.S.)">Statesman 5/4 (O.S.)</option>
+                                <option value="Taliesan (O.S.)">Taliesan (O.S.)</option>
+                                <option value="Transition">Transition</option>
+                                <option value="Transition 1 PC MDF">Transition 1 PC MDF</option>
+                                <option value="Transition 1 PC MDF 5/4">Transition 1 PC MDF 5/4</option>
+                                <option value="Transition 3">Transition 3</option>
+                                <option value="Transition 3 1 PC MDF">Transition 3 1 PC MDF</option>
+                                <option value="Transition 3 1 PC MDF 5/4">Transition 3 1 PC MDF 5/4</option>
+                                <option value="Vesta 5/4">Vesta 5/4</option>
+                                <option value="Vienna (O.S.)">Vienna (O.S.)</option>
+                                <option value="Vintage">Vintage</option>
+                                <option value="Vintage 3">Vintage 3</option>
+                                <option value="Vintage 3 (O.S.)">Vintage 3 (O.S.)</option>
+                                <option value="Vintage 1-PC MDRF (O.S.)">Vintage 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 3 1-PC MDRF (O.S.)">Vintage 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 5/4 (O.S.)">Vintage 5/4 (O.S.)</option>
+                                <option value="Vintage 3 5/4 (O.S.)">Vintage 3 5/4 (O.S.)</option>
+                                <option value="Vintage 5-PC MDRF (O.S.)">Vintage 5-PC MDRF (O.S.)</option>
+                                <option value="Vogue">Vogue</option>
+                                <option value="Vogue (O.S.)">Vogue (O.S.)</option>
+                                <option value="Vogue 1-PC MDRF (O.S.)">Vogue 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3">Vogue 3</option>
+                                <option value="Vogue 3 (O.S.)">Vogue 3 (O.S.)</option>
+                                <option value="Vogue 3 1-PC MDRF (O.S.)">Vogue 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3 w/ P6 Panel">Vogue 3 w/ P6 Panel</option>
+                                <option value="Vogue 3 w/ P6 Panel (O.S.)">Vogue 3 w/ P6 Panel (O.S.)</option>
+                                <option value="Vogue 5/4 (O.S.)">Vogue 5/4 (O.S.)</option>
+                                <option value="Vogue 5-PC MDF (O.S.)">Vogue 5-PC MDF (O.S.)</option>
+                                <option value="Vogue w/ P6 Panel">Vogue w/ P6 Panel</option>
+                                <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
+                            </select>
+                        </div>
+                        <div class="field"><label>Deep Drawer</label>
+                            <select class="select-field" name="deep_drawer">
+                                <option value="">Select Door Style</option>
+                                <option value="Abbey">Abbey</option>
+                                <option value="Abbey w/ Bevel Trim">Abbey w/ Bevel Trim</option>
+                                <option value="Abbey w/ P6 Panel">Abbey w/ P6 Panel</option>
+                                <option value="Abbey w/ Square Aluminum Trim">Abbey w/ Square Aluminum Trim</option>
+                                <option value="Abbey 3">Abbey 3</option>
+                                <option value="Abbey 3 w/ Bevel Trim">Abbey 3 w/ Bevel Trim</option>
+                                <option value="Abbey 3 w/ P6 Panel">Abbey 3 w/ P6 Panel</option>
+                                <option value="Abbey 3 w/ Square Aluminum Trim">Abbey 3 w/ Square Aluminum Trim</option>
+                                <option value="Acela MDF (O.S.)">Acela MDF (O.S.)</option>
+                                <option value="Alexandria 5/4 (O.S.)">Alexandria 5/4 (O.S.)</option>
+                                <option value="Apollo">Apollo</option>
+                                <option value="Austere">Austere</option>
+                                <option value="Austere 3">Austere 3</option>
+                                <option value="Bayville 5/4 (O.S.)">Bayville 5/4 (O.S.)</option>
+                                <option value="Belmont">Belmont</option>
+                                <option value="Belmont 3">Belmont 3</option>
+                                <option value="Brookside 5/4">Brookside 5/4</option>
+                                <option value="Catalina 5/4 (O.S.)">Catalina 5/4 (O.S.)</option>
+                                <option value="Chatham 5/4">Chatham 5/4</option>
+                                <option value="Closed Louver (O.S.)">Closed Louver (O.S.)</option>
+                                <option value="Closed Louver Double Panel">Closed Louver Double Panel</option>
+                                <option value="Contempo">Contempo</option>
+                                <option value="Dorchester">Dorchester</option>
+                                <option value="Dorchester 3">Dorchester 3</option>
+                                <option value="Duke">Duke</option>
+                                <option value="Duke Special">Duke Special</option>
+                                <option value="Element Aluminum Doors (O.S.)">Element Aluminum Doors (O.S.)</option>
+                                <option value="Fairhaven">Fairhaven</option>
+                                <option value="Foundry">Foundry</option>
+                                <option value="Foundry 3">Foundry 3</option>
+                                <option value="Geneva">Geneva</option>
+                                <option value="Gemini">Gemini</option>
+                                <option value="Illusion (O.S.)">Illusion (O.S.)</option>
+                                <option value="Ironmaster">Ironmaster</option>
+                                <option value="Kent (O.S.)">Kent (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF (O.S.)">Kent 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 3 (O.S.)">Kent 3 (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF (O.S.)">Kent 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 5/4 (O.S.)">Kent 5/4 (O.S.)</option>
+                                <option value="Kent 3 5/4 (O.S.)">Kent 3 5/4 (O.S.)</option>
+                                <option value="Kent Raised Panel (O.S.)">Kent Raised Panel (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent 3 Raised Panel (O.S.)">Kent 3 Raised Panel (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent Slab w/ Applied Moulding (O.S.)">Kent Slab w/ Applied Moulding (O.S.)</option>
+                                <option value="Liberty (O.S.)">Liberty (O.S.)</option>
+                                <option value="Linea 1.5">Linea 1.5</option>
+                                <option value="Linea 3">Linea 3</option>
+                                <option value="Meadowbrook 5/4">Meadowbrook 5/4</option>
+                                <option value="Millbrook 5/4">Millbrook 5/4</option>
+                                <option value="Millbrook II 5/4">Millbrook II 5/4</option>
+                                <option value="Mirage 5-Pc MDF (O.S.)">Mirage 5-Pc MDF (O.S.)</option>
+                                <option value="Montauk 5/4">Montauk 5/4</option>
+                                <option value="Newport">Newport</option>
+                                <option value="Newport (O.S.)">Newport (O.S.)</option>
+                                <option value="Newport 5-Pc MDF (O.S.)">Newport 5-Pc MDF (O.S.)</option>
+                                <option value="Newport w/ P6 Panel">Newport w/ P6 Panel</option>
+                                <option value="Presidential">Presidential</option>
+                                <option value="Presidential 5/4">Presidential 5/4</option>
+                                <option value="Provence 5/4 (O.S.)">Provence 5/4 (O.S.)</option>
+                                <option value="Quaker">Quaker</option>
+                                <option value="Quaker (O.S.)">Quaker (O.S.)</option>
+                                <option value="Quaker 3">Quaker 3</option>
+                                <option value="Quaker 3 (O.S.)">Quaker 3 (O.S.)</option>
+                                <option value="Quaker 3 5/4 (O.S.)">Quaker 3 5/4 (O.S.)</option>
+                                <option value="Quaker 5/4 (O.S.)">Quaker 5/4 (O.S.)</option>
+                                <option value="Raya (O.S.)">Raya (O.S.)</option>
+                                <option value="Shaker">Shaker</option>
+                                <option value="Shaker (O.S.)">Shaker (O.S.)</option>
+                                <option value="Shaker 1-Pc MDRF (O.S.)">Shaker 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 5/4">Shaker 5/4</option>
+                                <option value="Shaker 3">Shaker 3</option>
+                                <option value="Shaker 3 (O.S.)">Shaker 3 (O.S.)</option>
+                                <option value="Shaker 3 1-Pc MDRF (O.S.)">Shaker 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 3 5/4 (O.S.)">Shaker 3 5/4 (O.S.)</option>
+                                <option value="Shaker 5 PC MDF">Shaker 5 PC MDF</option>
+                                <option value="Slab">Slab</option>
+                                <option value="Slab 1-Pc MDRF (O.S.)">Slab 1-Pc MDRF (O.S.)</option>
+                                <option value="Soho (O.S.)">Soho (O.S.)</option>
+                                <option value="Special">Special</option>
+                                <option value="Special Miter">Special Miter</option>
+                                <option value="Special Miter 5/4 (O.S.)">Special Miter 5/4 (O.S.)</option>
+                                <option value="Special Mortise &amp; Tenon">Special Mortise &amp; Tenon</option>
+                                <option value="Special Mortise &amp; Tenon 5/4 (O.S.)">Special Mortise &amp; Tenon 5/4 (O.S.)</option>
+                                <option value="Stainless Steel Key West (O.S.)">Stainless Steel Key West (O.S.)</option>
+                                <option value="Stainless Steel Slab (O.S.)">Stainless Steel Slab (O.S.)</option>
+                                <option value="Statesman 5/4 (O.S.)">Statesman 5/4 (O.S.)</option>
+                                <option value="Taliesan (O.S.)">Taliesan (O.S.)</option>
+                                <option value="Transition">Transition</option>
+                                <option value="Transition 1 PC MDF">Transition 1 PC MDF</option>
+                                <option value="Transition 1 PC MDF 5/4">Transition 1 PC MDF 5/4</option>
+                                <option value="Transition 3">Transition 3</option>
+                                <option value="Transition 3 1 PC MDF">Transition 3 1 PC MDF</option>
+                                <option value="Transition 3 1 PC MDF 5/4">Transition 3 1 PC MDF 5/4</option>
+                                <option value="Vesta 5/4">Vesta 5/4</option>
+                                <option value="Vienna (O.S.)">Vienna (O.S.)</option>
+                                <option value="Vintage">Vintage</option>
+                                <option value="Vintage 3">Vintage 3</option>
+                                <option value="Vintage 3 (O.S.)">Vintage 3 (O.S.)</option>
+                                <option value="Vintage 1-PC MDRF (O.S.)">Vintage 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 3 1-PC MDRF (O.S.)">Vintage 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 5/4 (O.S.)">Vintage 5/4 (O.S.)</option>
+                                <option value="Vintage 3 5/4 (O.S.)">Vintage 3 5/4 (O.S.)</option>
+                                <option value="Vintage 5-PC MDRF (O.S.)">Vintage 5-PC MDRF (O.S.)</option>
+                                <option value="Vogue">Vogue</option>
+                                <option value="Vogue (O.S.)">Vogue (O.S.)</option>
+                                <option value="Vogue 1-PC MDRF (O.S.)">Vogue 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3">Vogue 3</option>
+                                <option value="Vogue 3 (O.S.)">Vogue 3 (O.S.)</option>
+                                <option value="Vogue 3 1-PC MDRF (O.S.)">Vogue 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3 w/ P6 Panel">Vogue 3 w/ P6 Panel</option>
+                                <option value="Vogue 3 w/ P6 Panel (O.S.)">Vogue 3 w/ P6 Panel (O.S.)</option>
+                                <option value="Vogue 5/4 (O.S.)">Vogue 5/4 (O.S.)</option>
+                                <option value="Vogue 5-PC MDF (O.S.)">Vogue 5-PC MDF (O.S.)</option>
+                                <option value="Vogue w/ P6 Panel">Vogue w/ P6 Panel</option>
+                                <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="band">Appliances</div>
+                    <div class="two-col">
+                        <div class="field"><label>Appliance A</label><div class="line" name="appliance_a"></div></div>
+                        <div class="field"><label>Appliance B</label><div class="line" name="appliance_b"></div></div>
+                        <div class="field"><label>Appliance C</label><div class="line" name="appliance_c"></div></div>
+                        <div class="field"><label>Appliance D</label><div class="line" name="appliance_d"></div></div>
+                        <div class="field"><label>Appliance E</label><div class="line" name="appliance_e"></div></div>
+                        <div class="field"><label>Appliance F</label><div class="line" name="appliance_f"></div></div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="band">Notes</div>
+                    <div class="field"><label>Additional Notes</label><div class="line" name="notes" style="min-height: 80px;"></div></div>
+                </div>
+            </section>
+
+            <div class="submit-message" id="submitMessage"></div>
+            <div class="fallback-message" id="fallbackMessage">
+                If your email app did not open, click
+                <a id="fallbackMailLink" href="#">this backup email link</a>
+                or copy the form details into an email to pnfdealer.services@outlook.com.
+            </div>
+
+            <div class="submit-area">
+                <button type="submit" class="btn btn-submit" id="submitBtn">Email Onboarding</button>
+                <button type="button" class="btn btn-export" id="downloadPdfBtn">Print as PDF</button>
+                <button type="button" class="btn btn-reset" id="resetBtn">Clear Form</button>
+            </div>
+
+            <footer class="footer">
+                60 Newark Pompton Turnpike, Pequannock, NJ 07440 | 973.650.0608
+            </footer>
+        </main>
+    </form>
+
+    <script>
+        const agreementForm = document.getElementById('agreementForm');
+        const textFields = document.querySelectorAll('.line[name], .sig-line[name]');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name]');
+        const submitBtn = document.getElementById('submitBtn');
+        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const submitMessage = document.getElementById('submitMessage');
+        const fallbackMessage = document.getElementById('fallbackMessage');
+        const fallbackMailLink = document.getElementById('fallbackMailLink');
+        const faceFrameToggle = document.getElementById('faceFrameToggle');
+        const faceFrameOptions = document.getElementById('faceFrameOptions');
+        const framelessToggle = document.getElementById('framelessToggle');
+        const framelessOptions = document.getElementById('framelessOptions');
+        const formContainer = document.querySelector('.agreement');
+        const woodSpecieSelect = document.getElementById('woodSpecieSelect');
+        const finishDropdown = document.getElementById('finishDropdown');
+        const sheenDropdown = document.getElementById('sheenDropdown');
+
+        // Finish data: maps finishes and sheens with availability across wood species
+        const finishData = {"wood_species":["Alder - Knotty","Alder - Standard","Cherry","Maple","Maple - Hard","Red Birch","Red Oak","Red Oak - Rift Cut","Walnut","White Oak","White Oak - Quarter Sawn","White Oak - Rift Cut"],"sheens":["Flat","Matte","Satin","Gloss","Semi-Gloss"],"finishes":{"Amber":{"display":"Amber","type":"Stain","code":"ST42","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"S","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"S","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Coastal Blue":{"display":"Coastal Blue","type":"Stain","code":"ST49","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"N","Maple":"N","Maple - Hard":"S","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Espresso":{"display":"Espresso","type":"Stain","code":"ST45","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Gotham":{"display":"Gotham","type":"Stain","code":"ST46","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Honey Spice":{"display":"Honey Spice","type":"Stain","code":"ST41","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"S","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"S","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Natural":{"display":"Natural","type":"Stain","code":"ST14","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"S","Cherry":"S","Maple":"N","Maple - Hard":"S","Red Birch":"S","Red Oak":"S","Red Oak - Rift Cut":"A","Walnut":"S","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Silvercrest":{"display":"Silvercrest","type":"Stain","code":"ST47","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"S","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"S","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Tempest":{"display":"Tempest","type":"Stain","code":"ST48","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"S","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"S","White Oak":"S","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Warmington":{"display":"Warmington","type":"Stain","code":"ST44","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Whiskey Barrel":{"display":"Whiskey Barrel","type":"Stain","code":"ST38","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"S","Cherry":"S","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"S","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Winchester":{"display":"Winchester","type":"Stain","code":"ST43","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"S","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"S","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Winter Sky":{"display":"Winter Sky","type":"Stain","code":"ST40","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"S","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Winter Wheat":{"display":"Winter Wheat","type":"Stain","code":"ST39","factor":"0","species":{"Alder - Knotty":"A","Alder - Standard":"S","Cherry":"S","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"S","White Oak":"S","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Unfinished":{"display":"Unfinished","type":"Unfinished","code":"UN00","factor":"-5","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"A","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Aumoe":{"display":"Aumoe","type":"Stain with Glaze","code":"SG46HG","factor":"15","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"S","White Oak":"N","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Bramble":{"display":"Bramble","type":"Stain with Glaze","code":"SG51YG","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Chapelwood":{"display":"Chapelwood","type":"Stain with Glaze","code":"SG50GH","factor":"15","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Highland":{"display":"Highland","type":"Stain with Glaze","code":"SG40HG","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Indigo":{"display":"Indigo","type":"Stain with Glaze","code":"SG49GH","factor":"15","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"S","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Mansfield":{"display":"Mansfield","type":"Stain with Glaze","code":"SG43UG","factor":"20","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"S","Maple":"N","Maple - Hard":"A","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"N","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Medenvale":{"display":"Medenvale","type":"Stain with Glaze","code":"SG38BH","factor":"20","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"S","Maple":"N","Maple - Hard":"A","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Nottingham":{"display":"Nottingham","type":"Stain with Glaze","code":"SG39BG","factor":"20","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Shady Grove":{"display":"Shady Grove","type":"Stain with Glaze","code":"SG40SG","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Shirebrook":{"display":"Shirebrook","type":"Stain with Glaze","code":"SG39UG","factor":"20","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"S","Maple":"N","Maple - Hard":"S","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Stapleford":{"display":"Stapleford","type":"Stain with Glaze","code":"SG38UG","factor":"20","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"S","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Thicket":{"display":"Thicket","type":"Stain with Glaze","code":"SG40TG","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"S","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Alps":{"display":"Alps","type":"Tinted Sealer","code":"TS23PG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Blizzard":{"display":"Blizzard","type":"Tinted Sealer","code":"TS23BG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Winter Frost":{"display":"Winter Frost","type":"Tinted Sealer","code":"TS23GG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"S"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Platinum":{"display":"Platinum","type":"Toner with Glaze","code":"TG04PL","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"S","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Black":{"display":"Black","type":"Enamel","code":"EN02","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Buttercream":{"display":"Buttercream","type":"Enamel","code":"EN04","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Cannonball":{"display":"Cannonball","type":"Enamel","code":"EN37","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Celeste":{"display":"Celeste","type":"Enamel","code":"EN38","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Daydream":{"display":"Daydream","type":"Enamel","code":"EN30","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Dove White":{"display":"Dove White","type":"Enamel","code":"EN08","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Garden Gate":{"display":"Garden Gate","type":"Enamel","code":"EN32","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Jodi Grey":{"display":"Jodi Grey","type":"Enamel","code":"EN35","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Khaki":{"display":"Khaki","type":"Enamel","code":"EN13","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Raven":{"display":"Raven","type":"Enamel","code":"EN36","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Slate White":{"display":"Slate White","type":"Enamel","code":"EN14","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Springhouse":{"display":"Springhouse","type":"Enamel","code":"EN25","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Stone":{"display":"Stone","type":"Enamel","code":"EN15","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Triton Blue":{"display":"Triton Blue","type":"Enamel","code":"EN21","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Twiglight":{"display":"Twiglight","type":"Enamel","code":"EN34","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Vista Grey":{"display":"Vista Grey","type":"Enamel","code":"EN17","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Wandering Vine":{"display":"Wandering Vine","type":"Enamel","code":"EN33","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"White":{"display":"White","type":"Enamel","code":"EN18","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"White Sand":{"display":"White Sand","type":"Enamel","code":"EN20","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"White Primer":{"display":"White Primer","type":"Enamel","code":"EN19","factor":"10","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"S","Gloss":"N","Semi-Gloss":"N"}},"Alabaster":{"display":"Alabaster","type":"Cleartone with Glaze","code":"CG71GG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Fantasia Blue":{"display":"Fantasia Blue","type":"Cleartone with Glaze","code":"CG72BG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Fantasia Green":{"display":"Fantasia Green","type":"Cleartone with Glaze","code":"CG73UG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Lacey White":{"display":"Lacey White","type":"Cleartone with Glaze","code":"CG74SN","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Oyster":{"display":"Oyster","type":"Cleartone with Glaze","code":"CG75PG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Sterling":{"display":"Sterling","type":"Cleartone with Glaze","code":"Cg76PG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Black (Antique Distressed)":{"display":"Black (Antique Distressed)","type":"Antique Distressed","code":"AD97DG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"White (Antique Distressed)":{"display":"White (Antique Distressed)","type":"Antique Distressed","code":"AD90NG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Blue":{"display":"Blue","type":"Brush Mark Crackle","code":"BC01SP","factor":"55","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"S","Satin":"N","Gloss":"N","Semi-Gloss":"N"}},"Governor Black":{"display":"Governor Black","type":"Brush Mark Crackle","code":"BC87SP","factor":"55","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"S","Satin":"N","Gloss":"N","Semi-Gloss":"N"}},"Tavern White":{"display":"Tavern White","type":"Brush Mark Crackle","code":"BC80SP","factor":"55","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"S","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"S","Satin":"N","Gloss":"N","Semi-Gloss":"N"}},"Honey Spice (Dry Brush Glaze)":{"display":"Honey Spice (Dry Brush Glaze)","type":"Dry Brush Glaze","code":"PA41DB","factor":"50","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Whiskey Barrel (Dry Brush Glaze)":{"display":"Whiskey Barrel (Dry Brush Glaze)","type":"Dry Brush Glaze","code":"PA38DB","factor":"50","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Winchester (Dry Brush Glaze)":{"display":"Winchester (Dry Brush Glaze)","type":"Dry Brush Glaze","code":"PA43DB","factor":"50","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Winter Wheat (Dry Brush Glaze)":{"display":"Winter Wheat (Dry Brush Glaze)","type":"Dry Brush Glaze","code":"PA39DB","factor":"50","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"S","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Stain":{"display":"Stain","type":"Custom Stain","code":"CMST","factor":"5","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"A","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Stainwith Glaze":{"display":"Stainwith Glaze","type":"Custom Stain with Glaze","code":"CMSG","factor":"20","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"A","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Enamel*":{"display":"Enamel*","type":"Custom Enamel","code":"CMEN","factor":"20","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"A","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"A","Gloss":"N","Semi-Gloss":"N"}},"Painted Oak":{"display":"Painted Oak","type":"Custom Painted Oak","code":"CMU","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"N","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"N","Gloss":"N","Semi-Gloss":"N"}},"Cleartone with Glaze":{"display":"Cleartone with Glaze","type":"Custom Cleartone with Glaze","code":"CMCG","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"N","Maple":"A","Maple - Hard":"N","Red Birch":"N","Red Oak":"N","Red Oak - Rift Cut":"N","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Antique Distressed":{"display":"Antique Distressed","type":"Custom Antique Distressed","code":"CMAD","factor":"30","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"A","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Stain/Stain Mix":{"display":"Stain/Stain Mix","type":"Custom Stain/Stain Mix","code":"CMSS","factor":"10","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"N","Maple - Hard":"A","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Stain/Enamel Mix":{"display":"Stain/Enamel Mix","type":"Custom Stain/Enamel Mix","code":"CMSE","factor":"25","species":{"Alder - Knotty":"A","Alder - Standard":"A","Cherry":"A","Maple":"A","Maple - Hard":"A","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"A","White Oak":"A","White Oak - Quarter Sawn":"A","White Oak - Rift Cut":"A"},"sheens":{"Flat":"A","Matte":"A","Satin":"A","Gloss":"A","Semi-Gloss":"N"}},"Enamel/Enamel Mix":{"display":"Enamel/Enamel Mix","type":"Custom Enamel/Enamel Mix","code":"CMEE","factor":"25","species":{"Alder - Knotty":"N","Alder - Standard":"N","Cherry":"A","Maple":"A","Maple - Hard":"N","Red Birch":"N","Red Oak":"A","Red Oak - Rift Cut":"A","Walnut":"N","White Oak":"N","White Oak - Quarter Sawn":"N","White Oak - Rift Cut":"N"},"sheens":{"Flat":"N","Matte":"A","Satin":"A","Gloss":"N","Semi-Gloss":"N"}}}};
+
+        // Update finish options based on wood species
+        function updateFinishOptions() {
+            const selectedSpecies = woodSpecieSelect.value;
+            const currentFinish = finishDropdown.value;
+            
+            // Clear the dropdown except for the placeholder
+            while (finishDropdown.children.length > 1) {
+                finishDropdown.removeChild(finishDropdown.lastChild);
+            }
+            
+            // If no species selected, reset sheens too
+            if (!selectedSpecies) {
+                finishDropdown.value = '';
+                updateSheenOptions();
+                return;
+            }
+            
+            // Separate finishes by availability for the selected species
+            const standardFinishes = [];
+            const availableFinishes = [];
+            const notAvailableFinishes = [];
+            
+            for (const finishName in finishData.finishes) {
+                const finishInfo = finishData.finishes[finishName];
+                const speciesAvail = finishInfo.species[selectedSpecies] || 'N';
+                
+                // Build display name with factor
+                let displayName = finishInfo.display + ' (' + finishInfo.factor + '%)';
+                
+                if (speciesAvail === 'S') {
+                    standardFinishes.push({ name: finishName, display: displayName });
+                } else if (speciesAvail === 'A') {
+                    availableFinishes.push({ name: finishName, display: displayName });
+                } else {
+                    notAvailableFinishes.push({ name: finishName, display: displayName });
+                }
+            }
+            
+            // Sort all arrays alphabetically
+            standardFinishes.sort((a, b) => a.display.localeCompare(b.display));
+            availableFinishes.sort((a, b) => a.display.localeCompare(b.display));
+            notAvailableFinishes.sort((a, b) => a.display.localeCompare(b.display));
+            
+            // Add Standard Finishes
+            if (standardFinishes.length > 0) {
+                const stdGroup = document.createElement('optgroup');
+                stdGroup.label = 'Standard Finishes';
+                standardFinishes.forEach(function (finish) {
+                    const option = document.createElement('option');
+                    option.value = finish.name;
+                    option.textContent = finish.display;
+                    option.setAttribute('data-type', 'standard');
+                    option.style.backgroundColor = '#d4edda';
+                    option.style.color = '#1a4620';
+                    stdGroup.appendChild(option);
+                });
+                finishDropdown.appendChild(stdGroup);
+            }
+            
+            // Add Available Finishes
+            if (availableFinishes.length > 0) {
+                const availGroup = document.createElement('optgroup');
+                availGroup.label = 'Available Finishes';
+                availableFinishes.forEach(function (finish) {
+                    const option = document.createElement('option');
+                    option.value = finish.name;
+                    option.textContent = finish.display;
+                    option.setAttribute('data-type', 'available');
+                    option.style.backgroundColor = '#fff3cd';
+                    option.style.color = '#664d03';
+                    availGroup.appendChild(option);
+                });
+                finishDropdown.appendChild(availGroup);
+            }
+            
+            // Add Not Available Finishes (in pastel pink)
+            if (notAvailableFinishes.length > 0) {
+                const notAvailGroup = document.createElement('optgroup');
+                notAvailGroup.label = 'Not Available for this Species';
+                notAvailableFinishes.forEach(function (finish) {
+                    const option = document.createElement('option');
+                    option.value = finish.name;
+                    option.textContent = finish.display + ' (N/A)';
+                    option.setAttribute('data-type', 'not-available');
+                    option.style.backgroundColor = '#f8d7da';
+                    option.style.color = '#721c24';
+                    notAvailGroup.appendChild(option);
+                });
+                finishDropdown.appendChild(notAvailGroup);
+            }
+            
+            // Restore previous selection if available
+            if (currentFinish && finishDropdown.querySelector('option[value="' + currentFinish + '"]')) {
+                finishDropdown.value = currentFinish;
+            } else {
+                finishDropdown.value = '';
+            }
+            
+            updateSheenOptions();
+        }
+
+        // Update sheen options based on selected finish
+        function updateSheenOptions() {
+            const selectedFinish = finishDropdown.value;
+            const currentSheen = sheenDropdown.value;
+            
+            // Clear the dropdown except for the placeholder
+            while (sheenDropdown.children.length > 1) {
+                sheenDropdown.removeChild(sheenDropdown.lastChild);
+            }
+            
+            // If no finish selected, reset and disable sheen dropdown
+            if (!selectedFinish) {
+                sheenDropdown.value = '';
+                sheenDropdown.disabled = true;
+                return;
+            }
+            
+            // Get sheen availability for the selected finish
+            const finishInfo = finishData.finishes[selectedFinish];
+            if (!finishInfo || !finishInfo.sheens) {
+                sheenDropdown.value = '';
+                sheenDropdown.disabled = true;
+                return;
+            }
+            
+            sheenDropdown.disabled = false;
+            
+            // Separate sheens by availability for this finish
+            const standardSheens = [];
+            const availableSheens = [];
+            const notAvailableSheens = [];
+            
+            finishData.sheens.forEach(function (sheenName) {
+                const sheenAvail = finishInfo.sheens[sheenName] || 'N';
+                
+                if (sheenAvail === 'S') {
+                    standardSheens.push(sheenName);
+                } else if (sheenAvail === 'A') {
+                    availableSheens.push(sheenName);
+                } else {
+                    notAvailableSheens.push(sheenName);
+                }
+            });
+            
+            // Add Standard Sheens
+            if (standardSheens.length > 0) {
+                const stdGroup = document.createElement('optgroup');
+                stdGroup.label = 'Standard Sheens';
+                standardSheens.forEach(function (sheen) {
+                    const option = document.createElement('option');
+                    option.value = sheen;
+                    option.textContent = sheen;
+                    option.style.backgroundColor = '#d4edda';
+                    option.style.color = '#1a4620';
+                    stdGroup.appendChild(option);
+                });
+                sheenDropdown.appendChild(stdGroup);
+            }
+            
+            // Add Available Sheens
+            if (availableSheens.length > 0) {
+                const availGroup = document.createElement('optgroup');
+                availGroup.label = 'Available Sheens';
+                availableSheens.forEach(function (sheen) {
+                    const option = document.createElement('option');
+                    option.value = sheen;
+                    option.textContent = sheen;
+                    option.style.backgroundColor = '#fff3cd';
+                    option.style.color = '#664d03';
+                    availGroup.appendChild(option);
+                });
+                sheenDropdown.appendChild(availGroup);
+            }
+            
+            // Add Not Available Sheens
+            if (notAvailableSheens.length > 0) {
+                const notAvailGroup = document.createElement('optgroup');
+                notAvailGroup.label = 'Not Available';
+                notAvailableSheens.forEach(function (sheen) {
+                    const option = document.createElement('option');
+                    option.value = sheen;
+                    option.textContent = sheen + ' (N/A)';
+                    option.style.backgroundColor = '#f8d7da';
+                    option.style.color = '#721c24';
+                    notAvailGroup.appendChild(option);
+                });
+                sheenDropdown.appendChild(notAvailGroup);
+            }
+            
+            // Restore previous selection if available
+            if (currentSheen && sheenDropdown.querySelector('option[value="' + currentSheen + '"]')) {
+                sheenDropdown.value = currentSheen;
+            } else {
+                sheenDropdown.value = '';
+            }
+        }
+
+        // Initialize editable text fields
+        textFields.forEach(function (field) {
+            field.setAttribute('contenteditable', 'true');
+            field.setAttribute('tabindex', '0');
+            field.setAttribute('role', 'textbox');
+            if (!field.classList.contains('tall')) {
+                field.setAttribute('aria-multiline', 'false');
+            } else {
+                field.setAttribute('aria-multiline', 'true');
+            }
+        });
+
+        function updateFramelessOptionsState() {
+            const framelessSelected = framelessToggle && framelessToggle.checked;
+            const melamineBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="frameless_interior"]');
+
+            if (framelessOptions) {
+                framelessOptions.classList.toggle('disabled', !framelessSelected);
+            }
+
+            melamineBoxes.forEach(function (box) {
+                box.disabled = !framelessSelected;
+                if (!framelessSelected) {
+                    box.checked = false;
+                }
+            });
+        }
+
+        function updateFaceFrameOptionsState() {
+            const faceFrameSelected = faceFrameToggle && faceFrameToggle.checked;
+            const faceFrameBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_style"]');
+            const faceFrameInteriorBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_interior"]');
+
+            if (faceFrameOptions) {
+                faceFrameOptions.classList.toggle('disabled', !faceFrameSelected);
+            }
+
+            faceFrameBoxes.forEach(function (box) {
+                box.disabled = !faceFrameSelected;
+                if (!faceFrameSelected) {
+                    box.checked = false;
+                }
+            });
+
+            faceFrameInteriorBoxes.forEach(function (box) {
+                box.disabled = !faceFrameSelected;
+                if (!faceFrameSelected) {
+                    box.checked = false;
+                }
+            });
+        }
+
+        // Lock form
+        function lockForm() {
+            formContainer.classList.add('form-locked');
+            textFields.forEach(function (field) {
+                field.setAttribute('contenteditable', 'false');
+            });
+            checkboxes.forEach(function (box) {
+                box.disabled = true;
+            });
+            submitBtn.disabled = true;
+        }
+
+        // Unlock form
+        function unlockForm() {
+            formContainer.classList.remove('form-locked');
+            textFields.forEach(function (field) {
+                field.setAttribute('contenteditable', 'true');
+            });
+            checkboxes.forEach(function (box) {
+                box.disabled = false;
+            });
+            updateFaceFrameOptionsState();
+            updateFramelessOptionsState();
+            submitBtn.disabled = false;
+        }
+
+        // Show message
+        function showMessage(text) {
+            submitMessage.textContent = text;
+            submitMessage.classList.add('show');
+        }
+
+        // Hide message
+        function hideMessage() {
+            submitMessage.classList.remove('show');
+            fallbackMessage.classList.remove('show');
+        }
+
+        function getFieldValue(fieldName) {
+            const field = agreementForm.querySelector('[name="' + fieldName + '"]');
+            if (!field) {
+                return '';
+            }
+            if (field.tagName === 'SELECT') {
+                return field.value;
+            }
+            if (field.tagName === 'INPUT' && field.type === 'checkbox') {
+                return field.checked ? 'Yes' : 'No';
+            }
+            return field.textContent.trim();
+        }
+
+        function getCheckedLabels(fieldName) {
+            return Array.from(agreementForm.querySelectorAll('input[type="checkbox"][name="' + fieldName + '"]:checked'))
+                .map(function (box) {
+                    return box.getAttribute('data-label') || box.value;
+                });
+        }
+
+        function formatValue(value) {
+            return value || '[blank]';
+        }
+
+        function buildAgreementBody() {
+            return [
+                'Plain & Fancy Trade Partner - Estimate / Order / Designer Express Ordering Process',
+                '',
+                'Client Details',
+                'Client Name: ' + formatValue(getFieldValue('client_name')),
+                'Project Name: ' + formatValue(getFieldValue('project_name')),
+                'Project Address: ' + formatValue(getFieldValue('project_address')),
+                'City / State / ZIP: ' + formatValue(getFieldValue('city_state_zip')),
+                'Primary Phone: ' + formatValue(getFieldValue('primary_phone')),
+                'Email: ' + formatValue(getFieldValue('email')),
+                '',
+                'Services',
+                'Services: ' + formatValue(getCheckedLabels('services').join(', ')),
+                '',
+                'Product Line',
+                'Product Line: ' + formatValue(getCheckedLabels('product_line').join(', ')),
+                'Face Frame Type: ' + formatValue(getCheckedLabels('face_frame_style').join(', ')),
+                'Face Frame Interior: ' + formatValue(getCheckedLabels('face_frame_interior').join(', ')),
+                'Frameless Interior: ' + formatValue(getCheckedLabels('frameless_interior').join(', ')),
+                '',
+                'Product Specifications',
+                'Wood Specie: ' + formatValue(getFieldValue('wood_specie')),
+                'Finish: ' + formatValue(getFieldValue('finish')),
+                'Sheen: ' + formatValue(getFieldValue('sheen')),
+                'Wall Door: ' + formatValue(getFieldValue('wall_door')),
+                'Base Door: ' + formatValue(getFieldValue('base_door')),
+                'Shallow Drawer: ' + formatValue(getFieldValue('shallow_drawer')),
+                'Deep Drawer: ' + formatValue(getFieldValue('deep_drawer')),
+                '',
+                'Appliances',
+                'Appliance A: ' + formatValue(getFieldValue('appliance_a')),
+                'Appliance B: ' + formatValue(getFieldValue('appliance_b')),
+                'Appliance C: ' + formatValue(getFieldValue('appliance_c')),
+                'Appliance D: ' + formatValue(getFieldValue('appliance_d')),
+                'Appliance E: ' + formatValue(getFieldValue('appliance_e')),
+                'Appliance F: ' + formatValue(getFieldValue('appliance_f')),
+                '',
+                'Notes',
+                'Additional Notes: ' + formatValue(getFieldValue('notes')),
+                '',
+                'Submitted from pnfcds.com'
+            ].join('\n');
+        }
+
+        // Open the user's mail client with a complete agreement draft
+        agreementForm.addEventListener('submit', function (e) {
+            const recipient = 'pnfdealer.services@outlook.com';
+            const clientEmail = getFieldValue('email');
+            const clientName = getFieldValue('client_name') || 'Client';
+            const projectName = getFieldValue('project_name') || 'Project';
+            const subject = 'Plain & Fancy Trade Partner (Estimate / Order / Designer Express Ordering Process) - ' + clientName + ' [' + projectName + ']';
+            const body = buildAgreementBody();
+            let mailtoLink = 'mailto:' + encodeURIComponent(recipient) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+            e.preventDefault();
+
+            if (clientEmail) {
+                mailtoLink += '&cc=' + encodeURIComponent(clientEmail);
+            }
+
+            showMessage('Your email draft is opening now. Review it in your mail app, then click Send.');
+            fallbackMailLink.href = mailtoLink;
+            fallbackMessage.classList.add('show');
+            window.location.href = mailtoLink;
+        });
+
+        downloadPdfBtn.addEventListener('click', function () {
+            showMessage('Print dialog opening. Choose "Save as PDF", save the file, then attach it to your email draft.');
+            fallbackMessage.classList.remove('show');
+            window.print();
+        });
+
+        if (faceFrameToggle) {
+            faceFrameToggle.addEventListener('change', updateFaceFrameOptionsState);
+        }
+        if (framelessToggle) {
+            framelessToggle.addEventListener('change', updateFramelessOptionsState);
+        }
+        if (woodSpecieSelect) {
+            woodSpecieSelect.addEventListener('change', updateFinishOptions);
+            woodSpecieSelect.addEventListener('change', function() { togglePlaceholderClass(woodSpecieSelect); });
+        }
+        if (finishDropdown) {
+            finishDropdown.addEventListener('change', updateSheenOptions);
+            finishDropdown.addEventListener('change', function() { togglePlaceholderClass(finishDropdown); });
+        }
+
+        // Toggle placeholder class on all select fields
+        function togglePlaceholderClass(sel) {
+            if (sel.value === '') {
+                sel.classList.add('placeholder');
+            } else {
+                sel.classList.remove('placeholder');
+            }
+        }
+
+        // Add placeholder toggle to all select fields
+        agreementForm.querySelectorAll('select.select-field').forEach(function(sel) {
+            sel.addEventListener('change', function() { togglePlaceholderClass(sel); });
+            togglePlaceholderClass(sel);
+        });
+
+        updateFaceFrameOptionsState();
+        updateFramelessOptionsState();
+        updateFinishOptions();
+
+        // Reset handler
+        resetBtn.addEventListener('click', function () {
+            if (confirm('Clear all data from the form?')) {
+                unlockForm();
+                hideMessage();
+                textFields.forEach(function (field) {
+                    field.textContent = '';
+                });
+                checkboxes.forEach(function (box) {
+                    box.checked = false;
+                });
+                agreementForm.querySelectorAll('select[name]').forEach(function (selectField) {
+                    selectField.selectedIndex = 0;
+                    togglePlaceholderClass(selectField);
+                });
+                updateFaceFrameOptionsState();
+                updateFramelessOptionsState();
+                updateFinishOptions();
+            }
+        });
+    </script>
+</body>
+</html>

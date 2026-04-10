@@ -1,0 +1,747 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kitchen Design Client Agreement</title>
+    <style>
+        :root {
+            --ink: #2f2a22;
+            --paper: #fbfaf7;
+            --line: #d8d0bf;
+            --band-start: #445332;
+            --band-mid: #5d7343;
+            --band-end: #769259;
+            --accent: #5d7343;
+            --soft: #e8efdf;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 85% 10%, rgba(93, 115, 67, 0.14), transparent 40%),
+                linear-gradient(170deg, #f1f4ec 0%, #fbfaf7 45%, #f2f6ec 100%);
+            color: var(--ink);
+            font-family: "Cormorant Garamond", "Garamond", "Baskerville", "Times New Roman", serif;
+            line-height: 1.35;
+            padding: 20px 14px;
+        }
+
+        .agreement {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 14px 30px rgba(33, 26, 18, 0.12);
+        }
+
+        .top {
+            padding: 5px 32px 4px;
+            background: linear-gradient(180deg, #fffefb 0%, #edf3e5 100%);
+            border-bottom: 1px solid var(--line);
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-layout {
+            display: grid;
+            grid-template-columns: 80% 20%;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .top-copy {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .logo-wrap {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .logo-wrap img {
+            width: min(144px, 100%);
+            height: auto;
+        }
+
+        .title {
+            text-align: left;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: clamp(0.95rem, 0.88rem + 0.4vw, 1.25rem);
+            margin: 0 0 1px;
+            color: #3f3526;
+        }
+
+        .subtitle {
+            text-align: left;
+            margin: 0;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            color: #4f5f3b;
+            font-size: 0.72rem;
+            letter-spacing: 0.35px;
+        }
+
+        .doc-body {
+            padding: 12px 14px 14px;
+            display: grid;
+            gap: 9px;
+        }
+
+        .band {
+            background: linear-gradient(90deg, var(--band-start), var(--band-mid) 52%, var(--band-end));
+            color: #ffffff;
+            padding: 5px 9px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.66rem;
+            font-weight: 600;
+            box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.22);
+        }
+
+        .section {
+            border: 1px solid #e3dbcc;
+            border-radius: 8px;
+            background: #fffdf8;
+            padding: 9px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px 10px;
+        }
+
+        .field {
+            display: grid;
+            gap: 2px;
+        }
+
+        .field label {
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.65px;
+            text-transform: uppercase;
+            color: #6e5e43;
+        }
+
+        .line {
+            min-height: 21px;
+            border: 1px solid #d9cfbe;
+            border-radius: 6px;
+            background: #fffcf6;
+            padding: 2px 6px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.25;
+            cursor: text;
+            white-space: pre-wrap;
+        }
+
+        .line.tall {
+            min-height: 48px;
+        }
+
+        .sig-line {
+            min-height: 24px;
+            border-bottom: 1px solid #b9aa8d;
+            padding: 2px 2px 1px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.25;
+            cursor: text;
+            white-space: pre-wrap;
+        }
+
+        .line[contenteditable="true"],
+        .sig-line[contenteditable="true"] {
+            outline: none;
+        }
+
+        .line[contenteditable="true"]:focus,
+        .sig-line[contenteditable="true"]:focus {
+            box-shadow: inset 0 0 0 1px rgba(68, 83, 50, 0.35);
+            background: #fffefb;
+        }
+
+        .copy {
+            margin: 0;
+            font-family: "Dubai", "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        th,
+        td {
+            border: 1px solid #dccfb9;
+            padding: 6px 8px;
+            vertical-align: middle;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.65px;
+        }
+
+        th {
+            text-align: left;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.67rem;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            background: var(--soft);
+            color: #5e5139;
+        }
+
+        .sign-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin-top: 3px;
+        }
+
+        .signature {
+            border: 1px solid #d9cfbe;
+            border-radius: 6px;
+            background: #fffefb;
+            padding: 7px;
+            display: grid;
+            gap: 4px;
+        }
+
+        .sig-note {
+            font-size: 0.7rem;
+            color: #6d5c40;
+            margin: 0;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-area {
+            padding: 8px 14px 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: #f9f8f5;
+            border-top: 1px solid var(--line);
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit {
+            background: linear-gradient(90deg, var(--band-start), var(--band-mid) 52%, var(--band-end));
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(68, 83, 50, 0.2);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            box-shadow: 0 4px 10px rgba(68, 83, 50, 0.35);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-reset {
+            background: #e8e4d8;
+            color: #5d5e52;
+        }
+
+        .btn-reset:hover:not(:disabled) {
+            background: #dcd7c8;
+        }
+
+        .btn-export {
+            background: #dfe7d2;
+            color: #405330;
+            border: 1px solid #c3cfad;
+        }
+
+        .btn-export:hover:not(:disabled) {
+            background: #d3dec0;
+        }
+
+        .form-locked .line,
+        .form-locked .sig-line {
+            background: #f0ede5;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .submit-message {
+            padding: 10px 14px;
+            background: #e8f5e8;
+            border: 1px solid #a8d5a8;
+            border-radius: 6px;
+            color: #2d5a2d;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        .submit-message.show {
+            display: block;
+        }
+
+        .fallback-message {
+            display: none;
+            padding: 0 14px 10px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 0.78rem;
+            color: #5b503b;
+            text-align: center;
+        }
+
+        .fallback-message.show {
+            display: block;
+        }
+
+        .fallback-message a {
+            color: #445332;
+            font-weight: 600;
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 5px 12px 6px;
+            font-family: "Dubai", "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
+            font-size: 9pt;
+            letter-spacing: 0.2px;
+            color: #536541;
+            background: linear-gradient(180deg, #eef4e5 0%, #e5ecd9 100%);
+            text-align: center;
+        }
+
+        @media screen and (max-width: 760px) {
+            .top {
+                padding: 14px 12px 10px;
+                min-height: auto;
+            }
+
+            .top-layout {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .title,
+            .subtitle {
+                text-align: center;
+            }
+
+            .logo-wrap {
+                justify-content: center;
+            }
+
+            .doc-body {
+                padding: 10px;
+            }
+
+            .two-col,
+            .sign-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page {
+                size: letter;
+                margin: 0.25in 0.3in;
+            }
+
+            body {
+                padding: 0;
+                margin: 0;
+                background: #ffffff;
+                font-size: 9pt;
+                zoom: 95%;
+            }
+
+            [style*="height:44px"] { display: none !important; }
+
+            .agreement {
+                margin-top: 0;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .top {
+                min-height: 66px;
+                padding: 4px 24px 3px;
+            }
+
+            .doc-body {
+                gap: 6px;
+                padding: 10px 11px 10px;
+            }
+
+            .section {
+                padding: 7px;
+                gap: 5px;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            th,
+            td {
+                padding: 5px 6px;
+            }
+
+            .line {
+                min-height: 19px;
+                padding: 1px 5px;
+                font-size: 0.8rem;
+            }
+
+            .sig-line {
+                min-height: 22px;
+                padding: 1px 2px 1px;
+            }
+
+            .footer {
+                padding: 4px 10px 5px;
+            }
+
+            .band,
+            .footer,
+            .top {
+                background-clip: border-box;
+            }
+
+            .submit-area,
+            .submit-message {
+                display: none;
+            }
+        }
+    
+        /* Back-nav to main site */
+        .back-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            background: rgba(44,58,30,0.97);
+            display: flex;
+            align-items: center;
+            height: 44px;
+            padding: 0 1.5rem;
+        }
+        .back-nav a {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: rgba(255,255,255,0.82);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .back-nav a:hover { color: #fff; }
+        @media print { .back-nav { display: none; } }
+    </style>
+</head>
+<body>
+    <nav class="back-nav"><a href="../index.html">&lsaquo;&nbsp;CDS&nbsp;Home</a></nav>
+    <div style="height:44px"></div>
+    <form id="agreementForm">
+        <main class="agreement">
+            <header class="top">
+                <div class="top-layout">
+                    <div class="top-copy">
+                        <h1 class="title">Kitchen Design Client Agreement</h1>
+                        <p class="subtitle">A clear design partnership for elegant, functional spaces</p>
+                    </div>
+                    <div class="logo-wrap">
+                        <img src="../assets/logo.svg" alt="CDS Custom Cabinetry" />
+                    </div>
+                </div>
+            </header>
+
+            <section class="doc-body">
+                <div class="section">
+                    <div class="band">Client Details</div>
+                    <div class="two-col">
+                        <div class="field"><label>Client Name</label><div class="line" name="client_name"></div></div>
+                        <div class="field"><label>Project Name</label><div class="line" name="project_name"></div></div>
+                        <div class="field"><label>Project Address</label><div class="line" name="project_address"></div></div>
+                        <div class="field"><label>City / State / ZIP</label><div class="line" name="city_state_zip"></div></div>
+                        <div class="field"><label>Primary Phone</label><div class="line" name="primary_phone"></div></div>
+                        <div class="field"><label>Email</label><div class="line" name="email"></div></div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="band">Design Scope</div>
+                    <p class="copy">CDS will provide kitchen and cabinetry design consultation, field dimensions, layout development, floor plans, and elevations.</p>
+                    <table>
+                        <tr>
+                            <th style="width: 35%;">Included Services</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td>Initial Consultation and Site Review</td>
+                            <td><div class="line" name="service_1_notes"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Preliminary Layout and Concept</td>
+                            <td><div class="line" name="service_2_notes"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Final Cabinet Plan and Selections</td>
+                            <td><div class="line" name="service_3_notes"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <div class="band">Design Investment</div>
+                    <div class="two-col">
+                        <div class="field"><label>Design Retainer</label><div class="line" name="design_retainer"></div></div>
+                        <div class="field"><label>Date Retainer Due</label><div class="line" name="retainer_due_date"></div></div>
+                        <div class="field"><label>Total Design Fee</label><div class="line" name="total_design_fee"></div></div>
+                        <div class="field"><label>Balance Due Date</label><div class="line" name="balance_due_date"></div></div>
+                    </div>
+                    <p class="copy">Retainer is credited toward Plain &amp; Fancy cabinetry purchase through CDS.</p>
+                </div>
+
+                <div class="section">
+                    <div class="band">Notes</div>
+                    <div class="field"><label>Additional Notes</label><div class="line" name="notes" style="min-height: 80px;"></div></div>
+                </div>
+
+                <div class="section">
+                    <div class="band">Terms and Timeline</div>
+                    <div class="two-col">
+                        <div class="field"><label>Estimated design timeline</label><div class="line" name="design_timeline"></div></div>
+                        <div class="field"><label>Included revisions before approval</label><div class="line" name="revisions_included"></div></div>
+                    </div>
+                    <p class="copy">Client approval required before ordering or fabrication. Post-approval changes may impact cost and timeline.</p>
+                </div>
+
+                <div class="section">
+                    <div class="band">Authorization and Signatures</div>
+                    <p class="copy">By signing, all parties acknowledge they have reviewed this agreement and authorize design services to proceed.</p>
+                    <div class="sign-grid">
+                        <div class="signature">
+                            <div class="sig-line" name="client_signature"></div>
+                            <p class="sig-note">Client Signature</p>
+                            <div class="line" name="client_date"></div>
+                            <p class="sig-note">Date</p>
+                        </div>
+                        <div class="signature">
+                            <div class="sig-line" name="designer_signature"></div>
+                            <p class="sig-note">Designer Signature</p>
+                            <div class="line" name="designer_date"></div>
+                            <p class="sig-note">Date</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="submit-message" id="submitMessage"></div>
+            <div class="fallback-message" id="fallbackMessage">
+                If your email app did not open, click
+                <a id="fallbackMailLink" href="#">this backup email link</a>
+                or copy the form details into an email to pnfdealer.services@outlook.com.
+            </div>
+
+            <div class="submit-area">
+                <button type="submit" class="btn btn-submit" id="submitBtn">Email Agreement</button>
+                <button type="button" class="btn btn-export" id="downloadPdfBtn">Print as PDF</button>
+                <button type="button" class="btn btn-reset" id="resetBtn">Clear Form</button>
+            </div>
+
+            <footer class="footer">
+                60 Newark Pompton Turnpike, Pequannock, NJ 07440 | 973.650.0608
+            </footer>
+        </main>
+    </form>
+
+    <script>
+        const agreementForm = document.getElementById('agreementForm');
+        const fields = document.querySelectorAll('[name]');
+        const submitBtn = document.getElementById('submitBtn');
+        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const submitMessage = document.getElementById('submitMessage');
+        const fallbackMessage = document.getElementById('fallbackMessage');
+        const fallbackMailLink = document.getElementById('fallbackMailLink');
+        const formContainer = document.querySelector('.agreement');
+
+        // Initialize editable fields
+        fields.forEach(function (field) {
+            field.setAttribute('contenteditable', 'true');
+            field.setAttribute('tabindex', '0');
+            field.setAttribute('role', 'textbox');
+            if (!field.classList.contains('tall')) {
+                field.setAttribute('aria-multiline', 'false');
+            } else {
+                field.setAttribute('aria-multiline', 'true');
+            }
+        });
+
+        // Lock form
+        function lockForm() {
+            formContainer.classList.add('form-locked');
+            fields.forEach(function (field) {
+                field.setAttribute('contenteditable', 'false');
+            });
+            submitBtn.disabled = true;
+        }
+
+        // Unlock form
+        function unlockForm() {
+            formContainer.classList.remove('form-locked');
+            fields.forEach(function (field) {
+                field.setAttribute('contenteditable', 'true');
+            });
+            submitBtn.disabled = false;
+        }
+
+        // Show message
+        function showMessage(text) {
+            submitMessage.textContent = text;
+            submitMessage.classList.add('show');
+        }
+
+        // Hide message
+        function hideMessage() {
+            submitMessage.classList.remove('show');
+            fallbackMessage.classList.remove('show');
+        }
+
+        function getFieldValue(fieldName) {
+            const field = agreementForm.querySelector('[name="' + fieldName + '"]');
+            return field ? field.textContent.trim() : '';
+        }
+
+        function formatValue(value) {
+            return value || '[blank]';
+        }
+
+        function buildAgreementBody() {
+            return [
+                'Kitchen Design Client Agreement',
+                '',
+                'Client Details',
+                'Client Name: ' + formatValue(getFieldValue('client_name')),
+                'Project Name: ' + formatValue(getFieldValue('project_name')),
+                'Project Address: ' + formatValue(getFieldValue('project_address')),
+                'City / State / ZIP: ' + formatValue(getFieldValue('city_state_zip')),
+                'Primary Phone: ' + formatValue(getFieldValue('primary_phone')),
+                'Email: ' + formatValue(getFieldValue('email')),
+                '',
+                'Design Scope',
+                'CDS will provide kitchen and cabinetry design consultation, field dimensions, layout development, floor plans, and elevations.',
+                'Initial Consultation and Site Review Notes: ' + formatValue(getFieldValue('service_1_notes')),
+                'Preliminary Layout and Concept Notes: ' + formatValue(getFieldValue('service_2_notes')),
+                'Final Cabinet Plan and Selections Notes: ' + formatValue(getFieldValue('service_3_notes')),
+                '',
+                'Design Investment',
+                'Design Retainer: ' + formatValue(getFieldValue('design_retainer')),
+                'Date Retainer Due: ' + formatValue(getFieldValue('retainer_due_date')),
+                'Total Design Fee: ' + formatValue(getFieldValue('total_design_fee')),
+                'Balance Due Date: ' + formatValue(getFieldValue('balance_due_date')),
+                'Retainer is credited toward Plain & Fancy cabinetry purchase through CDS.',
+                '',
+                'Terms and Timeline',
+                'Estimated design timeline: ' + formatValue(getFieldValue('design_timeline')),
+                'Included revisions before approval: ' + formatValue(getFieldValue('revisions_included')),
+                'Client approval required before ordering or fabrication.',
+                'Post-approval changes may impact cost and timeline.',
+                '',
+                'Authorization and Signatures',
+                'Client Signature: ' + formatValue(getFieldValue('client_signature')),
+                'Client Date: ' + formatValue(getFieldValue('client_date')),
+                'Designer Signature: ' + formatValue(getFieldValue('designer_signature')),
+                'Designer Date: ' + formatValue(getFieldValue('designer_date')),
+                '',
+                'Submitted from pnfcds.com'
+            ].join('\n');
+        }
+
+        // Open the user's mail client with a complete agreement draft
+        agreementForm.addEventListener('submit', function (e) {
+            const recipient = 'pnfdealer.services@outlook.com';
+            const clientEmail = getFieldValue('email');
+            const clientName = getFieldValue('client_name') || 'Client';
+            const projectName = getFieldValue('project_name') || 'Project';
+            const subject = 'Kitchen Design Client Agreement - ' + clientName + ' [' + projectName + ']';
+            const body = buildAgreementBody();
+            let mailtoLink = 'mailto:' + encodeURIComponent(recipient) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+            e.preventDefault();
+
+            if (clientEmail) {
+                mailtoLink += '&cc=' + encodeURIComponent(clientEmail);
+            }
+
+            showMessage('Your email draft is opening now. Review it in your mail app, then click Send.');
+            fallbackMailLink.href = mailtoLink;
+            fallbackMessage.classList.add('show');
+            window.location.href = mailtoLink;
+        });
+
+        downloadPdfBtn.addEventListener('click', function () {
+            showMessage('Print dialog opening. Choose "Save as PDF", save the file, then attach it to your email draft.');
+            fallbackMessage.classList.remove('show');
+            window.print();
+        });
+
+        // Reset handler
+        resetBtn.addEventListener('click', function () {
+            if (confirm('Clear all data from the form?')) {
+                unlockForm();
+                hideMessage();
+                fields.forEach(function (field) {
+                    field.textContent = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

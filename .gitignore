@@ -1,0 +1,18 @@
+# Temp / editor files
+logo_datauri.txt
+*.eps
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Source/reference files (not served by the site)
+CDS.Website.html
+CDS.Retail Client Design Agreement.html
+CDS.Trade Partner.Price Order DE.html
+Color logo - no background - adriatic blue gradient.svg
+Color logo - no background - Luxury Bronze.Light.svg
+Color logo - no background - luxury bronze.svg
+Color logo - no background - rich olive green.svg
+PlainFancy_Primary_CMYKGold.eps
