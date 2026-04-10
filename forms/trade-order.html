@@ -213,6 +213,12 @@
             opacity: 0.55;
         }
 
+        label.checkbox-option:has(input[type="checkbox"]:disabled) {
+            opacity: 0.45;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         .line {
             min-height: 21px;
             border: 1px solid #d9cfbe;
@@ -635,7 +641,7 @@
                                 <div class="face-frame-sub-columns">
                                     <div style="display: grid; gap: 7px; align-content: start;">
                                         <label class="field" style="gap: 6px;">
-                                            <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Face Frame Type</span>
+                                            <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Face Frame Thickness</span>
                                             <span class="option-stack">
                                                 <span class="checkbox-option"><input type="checkbox" name="face_frame_style" value="3_4_frame" data-label="3/4 Frame" />3/4 Frame</span>
                                                 <span class="checkbox-option"><input type="checkbox" name="face_frame_style" value="5_4_frame" data-label="5/4 Frame" />5/4 Frame</span>
@@ -684,7 +690,7 @@
                 <div class="section">
                     <div class="band">Product Specifications</div>
                     <div class="two-col">
-                        <div class="field"><label>Wood Specie</label>
+                        <div class="field"><label><span style="display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:50%;border:1.5px solid #5d7343;color:#5d7343;font-size:0.62rem;font-family:'Avenir Next','Century Gothic','Segoe UI',sans-serif;font-weight:700;line-height:1;margin-right:5px;vertical-align:middle;">1</span>Wood Specie</label>
                             <select class="select-field" name="wood_specie" id="woodSpecieSelect">
                                 <option value="">Select Wood Specie</option>
                                 <option value="Alder - Knotty">Alder - Knotty</option>
@@ -701,12 +707,12 @@
                                 <option value="White Oak - Rift Cut">White Oak - Rift Cut</option>
                             </select>
                         </div>
-                        <div class="field"><label>Finish</label>
+                        <div class="field"><label><span style="display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:50%;border:1.5px solid #5d7343;color:#5d7343;font-size:0.62rem;font-family:'Avenir Next','Century Gothic','Segoe UI',sans-serif;font-weight:700;line-height:1;margin-right:5px;vertical-align:middle;">2</span>Finish</label>
                             <select class="select-field" name="finish" id="finishDropdown">
                                 <option value="">Select Wood Specie First</option>
                             </select>
                         </div>
-                        <div class="field"><label>Sheen</label>
+                        <div class="field"><label><span style="display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:50%;border:1.5px solid #5d7343;color:#5d7343;font-size:0.62rem;font-family:'Avenir Next','Century Gothic','Segoe UI',sans-serif;font-weight:700;line-height:1;margin-right:5px;vertical-align:middle;">3</span>Sheen</label>
                             <select class="select-field" name="sheen" id="sheenDropdown">
                                 <option value="">Select Wood Specie and Finish First</option>
                             </select>
@@ -1467,6 +1473,17 @@
             }
         });
 
+        function updateProductLineMutualExclusion() {
+            const faceFrameSelected = faceFrameToggle && faceFrameToggle.checked;
+            const framelessSelected = framelessToggle && framelessToggle.checked;
+            if (faceFrameToggle) {
+                faceFrameToggle.disabled = framelessSelected;
+            }
+            if (framelessToggle) {
+                framelessToggle.disabled = faceFrameSelected;
+            }
+        }
+
         function updateFramelessOptionsState() {
             const framelessSelected = framelessToggle && framelessToggle.checked;
             const melamineBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="frameless_interior"]');
@@ -1487,6 +1504,7 @@
             const faceFrameSelected = faceFrameToggle && faceFrameToggle.checked;
             const faceFrameBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_style"]');
             const faceFrameInteriorBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_interior"]');
+            const faceFrameOverlayBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_overlay"]');
 
             if (faceFrameOptions) {
                 faceFrameOptions.classList.toggle('disabled', !faceFrameSelected);
@@ -1500,6 +1518,13 @@
             });
 
             faceFrameInteriorBoxes.forEach(function (box) {
+                box.disabled = !faceFrameSelected;
+                if (!faceFrameSelected) {
+                    box.checked = false;
+                }
+            });
+
+            faceFrameOverlayBoxes.forEach(function (box) {
                 box.disabled = !faceFrameSelected;
                 if (!faceFrameSelected) {
                     box.checked = false;
@@ -1530,6 +1555,7 @@
             });
             updateFaceFrameOptionsState();
             updateFramelessOptionsState();
+            updateProductLineMutualExclusion();
             submitBtn.disabled = false;
         }
 
@@ -1587,7 +1613,7 @@
                 '',
                 'Product Line',
                 'Product Line: ' + formatValue(getCheckedLabels('product_line').join(', ')),
-                'Face Frame Type: ' + formatValue(getCheckedLabels('face_frame_style').join(', ')),
+                'Face Frame Thickness: ' + formatValue(getCheckedLabels('face_frame_style').join(', ')),
                 'Face Frame Interior: ' + formatValue(getCheckedLabels('face_frame_interior').join(', ')),
                 'Frameless Interior: ' + formatValue(getCheckedLabels('frameless_interior').join(', ')),
                 '',
@@ -1656,10 +1682,16 @@
         });
 
         if (faceFrameToggle) {
-            faceFrameToggle.addEventListener('change', updateFaceFrameOptionsState);
+            faceFrameToggle.addEventListener('change', function () {
+                updateFaceFrameOptionsState();
+                updateProductLineMutualExclusion();
+            });
         }
         if (framelessToggle) {
-            framelessToggle.addEventListener('change', updateFramelessOptionsState);
+            framelessToggle.addEventListener('change', function () {
+                updateFramelessOptionsState();
+                updateProductLineMutualExclusion();
+            });
         }
         if (woodSpecieSelect) {
             woodSpecieSelect.addEventListener('change', updateFinishOptions);
@@ -1687,6 +1719,7 @@
 
         updateFaceFrameOptionsState();
         updateFramelessOptionsState();
+        updateProductLineMutualExclusion();
         updateFinishOptions();
 
         // Reset handler
@@ -1706,6 +1739,7 @@
                 });
                 updateFaceFrameOptionsState();
                 updateFramelessOptionsState();
+                updateProductLineMutualExclusion();
                 updateFinishOptions();
             }
         });
