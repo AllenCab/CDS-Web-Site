@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CDS Trade Partner for Plain & Fancy Cabinetry - Estimate / Order / Designer Express Ordering Process</title>
+    <title>CDS Trade Partner for Plain & Fancy Cabinetry - Estimate / Order / Designer Assist Ordering Process</title>
     <style>
         :root {
             --ink: #2f2a22;
@@ -149,8 +149,8 @@
 
         .product-line-columns {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 10px;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4px;
         }
 
         .face-frame-sub-columns {
@@ -184,13 +184,32 @@
         }
 
         .service-desc {
-            display: block;
-            font-size: 0.5rem;
+            display: inline;
+            font-size: 0.583rem;
             text-transform: none;
             letter-spacing: 0.2px;
             line-height: 1.35;
             color: #6e5e43;
-            margin-top: 1px;
+        }
+
+        .service-desc::before {
+            content: "\00a0\00a0";
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-right: 4px;
+            font-family: "Avenir Next", "Century Gothic", "Segoe UI", sans-serif;
         }
 
         .checkbox-option input[type="checkbox"] {
@@ -211,12 +230,6 @@
 
         .sub-options.disabled {
             opacity: 0.55;
-        }
-
-        label.checkbox-option:has(input[type="checkbox"]:disabled) {
-            opacity: 0.45;
-            cursor: not-allowed;
-            pointer-events: none;
         }
 
         .line {
@@ -601,7 +614,7 @@
                 <div class="top-layout">
                     <div class="top-copy">
                         <h1 class="title">CDS Trade Partner for Plain & Fancy Cabinetry</h1>
-                        <h2 class="title" style="font-size:1em;margin-top:2px;font-weight:500;">Estimate / Order / Designer Express Ordering Process</h2>
+                        <h2 class="title" style="font-size:1em;margin-top:2px;font-weight:500;">Estimate / Order / Designer Assist Ordering Process</h2>
                         <p class="subtitle">A clear design and ordering process for clean orders and a design that meets or exceeds your expectations.</p>
                     </div>
                     <div class="logo-wrap">
@@ -627,8 +640,8 @@
                     <div class="band">Services</div>
                     <div style="display: grid; gap: 7px;">
                         <label class="checkbox-option"><input type="checkbox" name="services" value="cost_estimate" data-label="Cost Estimate" /><span>Cost Estimate<span class="service-desc">We price your design or list of cabinets with the global parameters you provide using the factory's AdvanceWare application. Very small kitchens with clean presentations can be quoted in about an hour. Complete homes can take more than 16 hours. The rate for this quoting service is the same as the factory rate of $75.00 per hour.</span></span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="services" value="your_design_our_order" data-label="Your Design, Our Order Documents" /><span>Your Design, Our Order Documents<span class="service-desc">We order the cabinets we previously priced. We are cc'd on all correspondence. We interact with you and the factory, resolve all order issues, interact with engineering, and proofread the acknowledgment, confirming everything with you along the way. The rate for Pricing then Ordering is 1.5% of the list price minus what was paid for the pricing service.</span></span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="services" value="designer_express" data-label="Designer Express Ordering Process" /><span>Designer Express Ordering Process<span class="service-desc">Plain &amp; Fancy has an ordering process called Designer Express. The process requires very clean floor plans, very clean elevations, plan numbering that matches the order numbering, clean appliance specifications, and use of the AdvanceWare cloud based 2Configure application. Tedious for sure. We'll clean up the presentation of your design, perfect the nomenclature on the plans, sequence everything, group cabinets into sub-orders based on varying globals, and submit the order on your behalf &ndash; often we'll clear up questions and discrepancies preventing expensive oversights along the way. This process shortens the lead time by up to two weeks and earns a 5% credit. DE orders include a factory acknowledgement but not an opportunity to make changes. DE orders by CDS cost you nothing out of pocket. We save you both ordering time and production time in exchange for the 5% discount. PLEASE NOTE: to decrease the factory's order processing time effectively this DE option must be invoked early. This DE process works best when all custom items are resolved before order is submitted.</span></span></label>
+                        <label class="checkbox-option"><input type="checkbox" name="services" value="your_design_our_order" data-label="Your Design, Our Order Documents" /><span>Your Design, Our Order Documents<span class="service-desc">We order the cabinets we previously priced. With your qualified drawings this can be as little as 3% of the NET order amount. With our drawings and supplements this can be as much as 5%. We interact with the factory, resolve engineering questions, and confirm everything with you along the way. Coaching you to your next solo order is the goal here.</span></span></label>
+                        <label class="checkbox-option"><input type="checkbox" name="services" value="designer_express" data-label="Designer Assist Ordering Process" /><span>Designer Assist Ordering Process<span class="service-desc">Working along side your designer CDS supports the kitchen design, budget, and ordering process with full documentation, floor plans, elevations, and renderings. Your designer provides the configuration and the aesthetic selections. CDS provides the technical merits to ensure the cabinetry integrates perfectly with the appliances and the space. We meet in person twice &ndash; once with the end user and the designer and again with the designer for a thorough review. Two revisions &ndash; one major and one minor &ndash; are included. Complete with field dimensions and drawings this ordering process is 15% of the net cabinetry amount.</span></span></label>
                     </div>
                 </div>
 
@@ -641,7 +654,7 @@
                                 <div class="face-frame-sub-columns">
                                     <div style="display: grid; gap: 7px; align-content: start;">
                                         <label class="field" style="gap: 6px;">
-                                            <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Face Frame Thickness</span>
+                                            <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Face Frame Type</span>
                                             <span class="option-stack">
                                                 <span class="checkbox-option"><input type="checkbox" name="face_frame_style" value="3_4_frame" data-label="3/4 Frame" />3/4 Frame</span>
                                                 <span class="checkbox-option"><input type="checkbox" name="face_frame_style" value="5_4_frame" data-label="5/4 Frame" />5/4 Frame</span>
@@ -671,7 +684,10 @@
                             </div>
                         </div>
                         <div class="product-line-column">
-                            <label class="checkbox-option"><input type="checkbox" name="product_line" value="frameless" data-label="Frameless" id="framelessToggle" />Frameless</label>
+                            <div style="position: relative; display: flex; align-items: center; min-height: 20px;">
+                                <label class="checkbox-option"><input type="checkbox" name="product_line" value="frameless" data-label="Frameless" id="framelessToggle" />Frameless</label>
+                                <label class="checkbox-option" style="position: absolute; left: 50%; transform: translateX(-50%);"><input type="checkbox" name="product_line" value="richland" data-label="Richland" id="richlandToggle" />Richland</label>
+                            </div>
                             <div class="sub-options" id="framelessOptions">
                                 <label class="field" style="gap: 6px;">
                                     <span style="font-family: &quot;Avenir Next&quot;, &quot;Century Gothic&quot;, &quot;Segoe UI&quot;, sans-serif; font-size: 0.68rem; letter-spacing: 0.65px; text-transform: uppercase; color: #6e5e43;">Frameless Interior</span>
@@ -690,7 +706,7 @@
                 <div class="section">
                     <div class="band">Product Specifications</div>
                     <div class="two-col">
-                        <div class="field"><label><span style="display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:50%;border:1.5px solid #5d7343;color:#5d7343;font-size:0.62rem;font-family:'Avenir Next','Century Gothic','Segoe UI',sans-serif;font-weight:700;line-height:1;margin-right:5px;vertical-align:middle;">1</span>Wood Specie</label>
+                        <div class="field"><label><span class="step-num">1</span>Wood Specie</label>
                             <select class="select-field" name="wood_specie" id="woodSpecieSelect">
                                 <option value="">Select Wood Specie</option>
                                 <option value="Alder - Knotty">Alder - Knotty</option>
@@ -707,138 +723,17 @@
                                 <option value="White Oak - Rift Cut">White Oak - Rift Cut</option>
                             </select>
                         </div>
-                        <div class="field"><label><span style="display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:50%;border:1.5px solid #5d7343;color:#5d7343;font-size:0.62rem;font-family:'Avenir Next','Century Gothic','Segoe UI',sans-serif;font-weight:700;line-height:1;margin-right:5px;vertical-align:middle;">2</span>Finish</label>
+                        <div class="field"><label><span class="step-num">2</span>Finish</label>
                             <select class="select-field" name="finish" id="finishDropdown">
                                 <option value="">Select Wood Specie First</option>
                             </select>
                         </div>
-                        <div class="field"><label><span style="display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:50%;border:1.5px solid #5d7343;color:#5d7343;font-size:0.62rem;font-family:'Avenir Next','Century Gothic','Segoe UI',sans-serif;font-weight:700;line-height:1;margin-right:5px;vertical-align:middle;">3</span>Sheen</label>
+                        <div class="field"><label><span class="step-num">3</span>Sheen</label>
                             <select class="select-field" name="sheen" id="sheenDropdown">
                                 <option value="">Select Wood Specie and Finish First</option>
                             </select>
                         </div>
-                        <div class="field"><label>Wall Door</label>
-                            <select class="select-field" name="wall_door">
-                                <option value="">Select Door Style</option>
-                                <option value="Abbey">Abbey</option>
-                                <option value="Abbey w/ Bevel Trim">Abbey w/ Bevel Trim</option>
-                                <option value="Abbey w/ P6 Panel">Abbey w/ P6 Panel</option>
-                                <option value="Abbey w/ Square Aluminum Trim">Abbey w/ Square Aluminum Trim</option>
-                                <option value="Abbey 3">Abbey 3</option>
-                                <option value="Abbey 3 w/ Bevel Trim">Abbey 3 w/ Bevel Trim</option>
-                                <option value="Abbey 3 w/ P6 Panel">Abbey 3 w/ P6 Panel</option>
-                                <option value="Abbey 3 w/ Square Aluminum Trim">Abbey 3 w/ Square Aluminum Trim</option>
-                                <option value="Acela MDF (O.S.)">Acela MDF (O.S.)</option>
-                                <option value="Alexandria 5/4 (O.S.)">Alexandria 5/4 (O.S.)</option>
-                                <option value="Apollo">Apollo</option>
-                                <option value="Austere">Austere</option>
-                                <option value="Austere 3">Austere 3</option>
-                                <option value="Bayville 5/4 (O.S.)">Bayville 5/4 (O.S.)</option>
-                                <option value="Belmont">Belmont</option>
-                                <option value="Belmont 3">Belmont 3</option>
-                                <option value="Brookside 5/4">Brookside 5/4</option>
-                                <option value="Catalina 5/4 (O.S.)">Catalina 5/4 (O.S.)</option>
-                                <option value="Chatham 5/4">Chatham 5/4</option>
-                                <option value="Closed Louver (O.S.)">Closed Louver (O.S.)</option>
-                                <option value="Closed Louver Double Panel">Closed Louver Double Panel</option>
-                                <option value="Contempo">Contempo</option>
-                                <option value="Dorchester">Dorchester</option>
-                                <option value="Dorchester 3">Dorchester 3</option>
-                                <option value="Duke">Duke</option>
-                                <option value="Duke Special">Duke Special</option>
-                                <option value="Element Aluminum Doors (O.S.)">Element Aluminum Doors (O.S.)</option>
-                                <option value="Fairhaven">Fairhaven</option>
-                                <option value="Foundry">Foundry</option>
-                                <option value="Foundry 3">Foundry 3</option>
-                                <option value="Geneva">Geneva</option>
-                                <option value="Gemini">Gemini</option>
-                                <option value="Illusion (O.S.)">Illusion (O.S.)</option>
-                                <option value="Ironmaster">Ironmaster</option>
-                                <option value="Kent (O.S.)">Kent (O.S.)</option>
-                                <option value="Kent 1-Pc MDRF (O.S.)">Kent 1-Pc MDRF (O.S.)</option>
-                                <option value="Kent 3 (O.S.)">Kent 3 (O.S.)</option>
-                                <option value="Kent 3 1-Pc MDRF (O.S.)">Kent 3 1-Pc MDRF (O.S.)</option>
-                                <option value="Kent 5/4 (O.S.)">Kent 5/4 (O.S.)</option>
-                                <option value="Kent 3 5/4 (O.S.)">Kent 3 5/4 (O.S.)</option>
-                                <option value="Kent Raised Panel (O.S.)">Kent Raised Panel (O.S.)</option>
-                                <option value="Kent 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 1-Pc MDRF w/ Raised Panel (O.S.)</option>
-                                <option value="Kent 3 Raised Panel (O.S.)">Kent 3 Raised Panel (O.S.)</option>
-                                <option value="Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)</option>
-                                <option value="Kent Slab w/ Applied Moulding (O.S.)">Kent Slab w/ Applied Moulding (O.S.)</option>
-                                <option value="Liberty (O.S.)">Liberty (O.S.)</option>
-                                <option value="Linea 1.5">Linea 1.5</option>
-                                <option value="Linea 3">Linea 3</option>
-                                <option value="Meadowbrook 5/4">Meadowbrook 5/4</option>
-                                <option value="Millbrook 5/4">Millbrook 5/4</option>
-                                <option value="Millbrook II 5/4">Millbrook II 5/4</option>
-                                <option value="Mirage 5-Pc MDF (O.S.)">Mirage 5-Pc MDF (O.S.)</option>
-                                <option value="Montauk 5/4">Montauk 5/4</option>
-                                <option value="Newport">Newport</option>
-                                <option value="Newport (O.S.)">Newport (O.S.)</option>
-                                <option value="Newport 5-Pc MDF (O.S.)">Newport 5-Pc MDF (O.S.)</option>
-                                <option value="Newport w/ P6 Panel">Newport w/ P6 Panel</option>
-                                <option value="Presidential">Presidential</option>
-                                <option value="Presidential 5/4">Presidential 5/4</option>
-                                <option value="Provence 5/4 (O.S.)">Provence 5/4 (O.S.)</option>
-                                <option value="Quaker">Quaker</option>
-                                <option value="Quaker (O.S.)">Quaker (O.S.)</option>
-                                <option value="Quaker 3">Quaker 3</option>
-                                <option value="Quaker 3 (O.S.)">Quaker 3 (O.S.)</option>
-                                <option value="Quaker 3 5/4 (O.S.)">Quaker 3 5/4 (O.S.)</option>
-                                <option value="Quaker 5/4 (O.S.)">Quaker 5/4 (O.S.)</option>
-                                <option value="Raya (O.S.)">Raya (O.S.)</option>
-                                <option value="Shaker">Shaker</option>
-                                <option value="Shaker (O.S.)">Shaker (O.S.)</option>
-                                <option value="Shaker 1-Pc MDRF (O.S.)">Shaker 1-Pc MDRF (O.S.)</option>
-                                <option value="Shaker 5/4">Shaker 5/4</option>
-                                <option value="Shaker 3">Shaker 3</option>
-                                <option value="Shaker 3 (O.S.)">Shaker 3 (O.S.)</option>
-                                <option value="Shaker 3 1-Pc MDRF (O.S.)">Shaker 3 1-Pc MDRF (O.S.)</option>
-                                <option value="Shaker 3 5/4 (O.S.)">Shaker 3 5/4 (O.S.)</option>
-                                <option value="Shaker 5 PC MDF">Shaker 5 PC MDF</option>
-                                <option value="Slab">Slab</option>
-                                <option value="Slab 1-Pc MDRF (O.S.)">Slab 1-Pc MDRF (O.S.)</option>
-                                <option value="Soho (O.S.)">Soho (O.S.)</option>
-                                <option value="Special">Special</option>
-                                <option value="Special Miter">Special Miter</option>
-                                <option value="Special Miter 5/4 (O.S.)">Special Miter 5/4 (O.S.)</option>
-                                <option value="Special Mortise &amp; Tenon">Special Mortise &amp; Tenon</option>
-                                <option value="Special Mortise &amp; Tenon 5/4 (O.S.)">Special Mortise &amp; Tenon 5/4 (O.S.)</option>
-                                <option value="Stainless Steel Key West (O.S.)">Stainless Steel Key West (O.S.)</option>
-                                <option value="Stainless Steel Slab (O.S.)">Stainless Steel Slab (O.S.)</option>
-                                <option value="Statesman 5/4 (O.S.)">Statesman 5/4 (O.S.)</option>
-                                <option value="Taliesan (O.S.)">Taliesan (O.S.)</option>
-                                <option value="Transition">Transition</option>
-                                <option value="Transition 1 PC MDF">Transition 1 PC MDF</option>
-                                <option value="Transition 1 PC MDF 5/4">Transition 1 PC MDF 5/4</option>
-                                <option value="Transition 3">Transition 3</option>
-                                <option value="Transition 3 1 PC MDF">Transition 3 1 PC MDF</option>
-                                <option value="Transition 3 1 PC MDF 5/4">Transition 3 1 PC MDF 5/4</option>
-                                <option value="Vesta 5/4">Vesta 5/4</option>
-                                <option value="Vienna (O.S.)">Vienna (O.S.)</option>
-                                <option value="Vintage">Vintage</option>
-                                <option value="Vintage 3">Vintage 3</option>
-                                <option value="Vintage 3 (O.S.)">Vintage 3 (O.S.)</option>
-                                <option value="Vintage 1-PC MDRF (O.S.)">Vintage 1-PC MDRF (O.S.)</option>
-                                <option value="Vintage 3 1-PC MDRF (O.S.)">Vintage 3 1-PC MDRF (O.S.)</option>
-                                <option value="Vintage 5/4 (O.S.)">Vintage 5/4 (O.S.)</option>
-                                <option value="Vintage 3 5/4 (O.S.)">Vintage 3 5/4 (O.S.)</option>
-                                <option value="Vintage 5-PC MDRF (O.S.)">Vintage 5-PC MDRF (O.S.)</option>
-                                <option value="Vogue">Vogue</option>
-                                <option value="Vogue (O.S.)">Vogue (O.S.)</option>
-                                <option value="Vogue 1-PC MDRF (O.S.)">Vogue 1-PC MDRF (O.S.)</option>
-                                <option value="Vogue 3">Vogue 3</option>
-                                <option value="Vogue 3 (O.S.)">Vogue 3 (O.S.)</option>
-                                <option value="Vogue 3 1-PC MDRF (O.S.)">Vogue 3 1-PC MDRF (O.S.)</option>
-                                <option value="Vogue 3 w/ P6 Panel">Vogue 3 w/ P6 Panel</option>
-                                <option value="Vogue 3 w/ P6 Panel (O.S.)">Vogue 3 w/ P6 Panel (O.S.)</option>
-                                <option value="Vogue 5/4 (O.S.)">Vogue 5/4 (O.S.)</option>
-                                <option value="Vogue 5-PC MDF (O.S.)">Vogue 5-PC MDF (O.S.)</option>
-                                <option value="Vogue w/ P6 Panel">Vogue w/ P6 Panel</option>
-                                <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
-                            </select>
-                        </div>
-                        <div class="field"><label>Base Door</label>
+                        <div class="field"><label><span class="step-num">4</span>Base Door</label>
                             <select class="select-field" name="base_door">
                                 <option value="">Select Door Style</option>
                                 <option value="Abbey">Abbey</option>
@@ -959,7 +854,128 @@
                                 <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
                             </select>
                         </div>
-                        <div class="field"><label>Shallow Drawer</label>
+                        <div class="field"><label><span class="step-num">5</span>Wall Door</label>
+                            <select class="select-field" name="wall_door">
+                                <option value="">Select Door Style</option>
+                                <option value="Abbey">Abbey</option>
+                                <option value="Abbey w/ Bevel Trim">Abbey w/ Bevel Trim</option>
+                                <option value="Abbey w/ P6 Panel">Abbey w/ P6 Panel</option>
+                                <option value="Abbey w/ Square Aluminum Trim">Abbey w/ Square Aluminum Trim</option>
+                                <option value="Abbey 3">Abbey 3</option>
+                                <option value="Abbey 3 w/ Bevel Trim">Abbey 3 w/ Bevel Trim</option>
+                                <option value="Abbey 3 w/ P6 Panel">Abbey 3 w/ P6 Panel</option>
+                                <option value="Abbey 3 w/ Square Aluminum Trim">Abbey 3 w/ Square Aluminum Trim</option>
+                                <option value="Acela MDF (O.S.)">Acela MDF (O.S.)</option>
+                                <option value="Alexandria 5/4 (O.S.)">Alexandria 5/4 (O.S.)</option>
+                                <option value="Apollo">Apollo</option>
+                                <option value="Austere">Austere</option>
+                                <option value="Austere 3">Austere 3</option>
+                                <option value="Bayville 5/4 (O.S.)">Bayville 5/4 (O.S.)</option>
+                                <option value="Belmont">Belmont</option>
+                                <option value="Belmont 3">Belmont 3</option>
+                                <option value="Brookside 5/4">Brookside 5/4</option>
+                                <option value="Catalina 5/4 (O.S.)">Catalina 5/4 (O.S.)</option>
+                                <option value="Chatham 5/4">Chatham 5/4</option>
+                                <option value="Closed Louver (O.S.)">Closed Louver (O.S.)</option>
+                                <option value="Closed Louver Double Panel">Closed Louver Double Panel</option>
+                                <option value="Contempo">Contempo</option>
+                                <option value="Dorchester">Dorchester</option>
+                                <option value="Dorchester 3">Dorchester 3</option>
+                                <option value="Duke">Duke</option>
+                                <option value="Duke Special">Duke Special</option>
+                                <option value="Element Aluminum Doors (O.S.)">Element Aluminum Doors (O.S.)</option>
+                                <option value="Fairhaven">Fairhaven</option>
+                                <option value="Foundry">Foundry</option>
+                                <option value="Foundry 3">Foundry 3</option>
+                                <option value="Geneva">Geneva</option>
+                                <option value="Gemini">Gemini</option>
+                                <option value="Illusion (O.S.)">Illusion (O.S.)</option>
+                                <option value="Ironmaster">Ironmaster</option>
+                                <option value="Kent (O.S.)">Kent (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF (O.S.)">Kent 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 3 (O.S.)">Kent 3 (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF (O.S.)">Kent 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Kent 5/4 (O.S.)">Kent 5/4 (O.S.)</option>
+                                <option value="Kent 3 5/4 (O.S.)">Kent 3 5/4 (O.S.)</option>
+                                <option value="Kent Raised Panel (O.S.)">Kent Raised Panel (O.S.)</option>
+                                <option value="Kent 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent 3 Raised Panel (O.S.)">Kent 3 Raised Panel (O.S.)</option>
+                                <option value="Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)">Kent 3 1-Pc MDRF w/ Raised Panel (O.S.)</option>
+                                <option value="Kent Slab w/ Applied Moulding (O.S.)">Kent Slab w/ Applied Moulding (O.S.)</option>
+                                <option value="Liberty (O.S.)">Liberty (O.S.)</option>
+                                <option value="Linea 1.5">Linea 1.5</option>
+                                <option value="Linea 3">Linea 3</option>
+                                <option value="Meadowbrook 5/4">Meadowbrook 5/4</option>
+                                <option value="Millbrook 5/4">Millbrook 5/4</option>
+                                <option value="Millbrook II 5/4">Millbrook II 5/4</option>
+                                <option value="Mirage 5-Pc MDF (O.S.)">Mirage 5-Pc MDF (O.S.)</option>
+                                <option value="Montauk 5/4">Montauk 5/4</option>
+                                <option value="Newport">Newport</option>
+                                <option value="Newport (O.S.)">Newport (O.S.)</option>
+                                <option value="Newport 5-Pc MDF (O.S.)">Newport 5-Pc MDF (O.S.)</option>
+                                <option value="Newport w/ P6 Panel">Newport w/ P6 Panel</option>
+                                <option value="Presidential">Presidential</option>
+                                <option value="Presidential 5/4">Presidential 5/4</option>
+                                <option value="Provence 5/4 (O.S.)">Provence 5/4 (O.S.)</option>
+                                <option value="Quaker">Quaker</option>
+                                <option value="Quaker (O.S.)">Quaker (O.S.)</option>
+                                <option value="Quaker 3">Quaker 3</option>
+                                <option value="Quaker 3 (O.S.)">Quaker 3 (O.S.)</option>
+                                <option value="Quaker 3 5/4 (O.S.)">Quaker 3 5/4 (O.S.)</option>
+                                <option value="Quaker 5/4 (O.S.)">Quaker 5/4 (O.S.)</option>
+                                <option value="Raya (O.S.)">Raya (O.S.)</option>
+                                <option value="Shaker">Shaker</option>
+                                <option value="Shaker (O.S.)">Shaker (O.S.)</option>
+                                <option value="Shaker 1-Pc MDRF (O.S.)">Shaker 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 5/4">Shaker 5/4</option>
+                                <option value="Shaker 3">Shaker 3</option>
+                                <option value="Shaker 3 (O.S.)">Shaker 3 (O.S.)</option>
+                                <option value="Shaker 3 1-Pc MDRF (O.S.)">Shaker 3 1-Pc MDRF (O.S.)</option>
+                                <option value="Shaker 3 5/4 (O.S.)">Shaker 3 5/4 (O.S.)</option>
+                                <option value="Shaker 5 PC MDF">Shaker 5 PC MDF</option>
+                                <option value="Slab">Slab</option>
+                                <option value="Slab 1-Pc MDRF (O.S.)">Slab 1-Pc MDRF (O.S.)</option>
+                                <option value="Soho (O.S.)">Soho (O.S.)</option>
+                                <option value="Special">Special</option>
+                                <option value="Special Miter">Special Miter</option>
+                                <option value="Special Miter 5/4 (O.S.)">Special Miter 5/4 (O.S.)</option>
+                                <option value="Special Mortise &amp; Tenon">Special Mortise &amp; Tenon</option>
+                                <option value="Special Mortise &amp; Tenon 5/4 (O.S.)">Special Mortise &amp; Tenon 5/4 (O.S.)</option>
+                                <option value="Stainless Steel Key West (O.S.)">Stainless Steel Key West (O.S.)</option>
+                                <option value="Stainless Steel Slab (O.S.)">Stainless Steel Slab (O.S.)</option>
+                                <option value="Statesman 5/4 (O.S.)">Statesman 5/4 (O.S.)</option>
+                                <option value="Taliesan (O.S.)">Taliesan (O.S.)</option>
+                                <option value="Transition">Transition</option>
+                                <option value="Transition 1 PC MDF">Transition 1 PC MDF</option>
+                                <option value="Transition 1 PC MDF 5/4">Transition 1 PC MDF 5/4</option>
+                                <option value="Transition 3">Transition 3</option>
+                                <option value="Transition 3 1 PC MDF">Transition 3 1 PC MDF</option>
+                                <option value="Transition 3 1 PC MDF 5/4">Transition 3 1 PC MDF 5/4</option>
+                                <option value="Vesta 5/4">Vesta 5/4</option>
+                                <option value="Vienna (O.S.)">Vienna (O.S.)</option>
+                                <option value="Vintage">Vintage</option>
+                                <option value="Vintage 3">Vintage 3</option>
+                                <option value="Vintage 3 (O.S.)">Vintage 3 (O.S.)</option>
+                                <option value="Vintage 1-PC MDRF (O.S.)">Vintage 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 3 1-PC MDRF (O.S.)">Vintage 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vintage 5/4 (O.S.)">Vintage 5/4 (O.S.)</option>
+                                <option value="Vintage 3 5/4 (O.S.)">Vintage 3 5/4 (O.S.)</option>
+                                <option value="Vintage 5-PC MDRF (O.S.)">Vintage 5-PC MDRF (O.S.)</option>
+                                <option value="Vogue">Vogue</option>
+                                <option value="Vogue (O.S.)">Vogue (O.S.)</option>
+                                <option value="Vogue 1-PC MDRF (O.S.)">Vogue 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3">Vogue 3</option>
+                                <option value="Vogue 3 (O.S.)">Vogue 3 (O.S.)</option>
+                                <option value="Vogue 3 1-PC MDRF (O.S.)">Vogue 3 1-PC MDRF (O.S.)</option>
+                                <option value="Vogue 3 w/ P6 Panel">Vogue 3 w/ P6 Panel</option>
+                                <option value="Vogue 3 w/ P6 Panel (O.S.)">Vogue 3 w/ P6 Panel (O.S.)</option>
+                                <option value="Vogue 5/4 (O.S.)">Vogue 5/4 (O.S.)</option>
+                                <option value="Vogue 5-PC MDF (O.S.)">Vogue 5-PC MDF (O.S.)</option>
+                                <option value="Vogue w/ P6 Panel">Vogue w/ P6 Panel</option>
+                                <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
+                            </select>
+                        </div>
+                        <div class="field"><label><span class="step-num">6</span>Shallow Drawer</label>
                             <select class="select-field" name="shallow_drawer">
                                 <option value="">Select Door Style</option>
                                 <option value="Abbey">Abbey</option>
@@ -1080,7 +1096,7 @@
                                 <option value="Vogue w/ P6 Panel (O.S.)">Vogue w/ P6 Panel (O.S.)</option>
                             </select>
                         </div>
-                        <div class="field"><label>Deep Drawer</label>
+                        <div class="field"><label><span class="step-num">7</span>Deep Drawer</label>
                             <select class="select-field" name="deep_drawer">
                                 <option value="">Select Door Style</option>
                                 <option value="Abbey">Abbey</option>
@@ -1254,6 +1270,7 @@
         const faceFrameToggle = document.getElementById('faceFrameToggle');
         const faceFrameOptions = document.getElementById('faceFrameOptions');
         const framelessToggle = document.getElementById('framelessToggle');
+        const richlandToggle = document.getElementById('richlandToggle');
         const framelessOptions = document.getElementById('framelessOptions');
         const formContainer = document.querySelector('.agreement');
         const woodSpecieSelect = document.getElementById('woodSpecieSelect');
@@ -1265,6 +1282,10 @@
 
         // Update finish options based on wood species
         function updateFinishOptions() {
+            if (typeof RichlandCascade !== 'undefined' && RichlandCascade.isActive()) {
+                RichlandCascade.populateFinish();
+                return;
+            }
             const selectedSpecies = woodSpecieSelect.value;
             const currentFinish = finishDropdown.value;
             
@@ -1366,6 +1387,10 @@
 
         // Update sheen options based on selected finish
         function updateSheenOptions() {
+            if (typeof RichlandCascade !== 'undefined' && RichlandCascade.isActive()) {
+                RichlandCascade.populateSheen();
+                return;
+            }
             const selectedFinish = finishDropdown.value;
             const currentSheen = sheenDropdown.value;
             
@@ -1461,6 +1486,200 @@
             }
         }
 
+        // ===== Richland cascading filter (self-contained module) =====
+        // When the Richland product line is selected, this restricts Wood Specie,
+        // Finish, Sheen, and Door Style options to the Richland Designer's Guide set.
+        const RichlandCascade = (function () {
+            const DATA = {
+                species: ['Cherry', 'Maple', 'Hard Maple', 'Walnut', 'Rift Cut White Oak', 'Summit', 'Apex Oak'],
+                // species -> [ [finish, sheen | null], ... ]
+                finishes: {
+                    'Cherry': [['Amber', 'Satin'], ['Mansfield', 'Matte'], ['Natural', 'Satin'], ['Shirebrook', 'Matte'], ['Winchester', 'Satin'], ['Winter Wheat', 'Satin'], ['Whiskey Barrel', 'Satin']],
+                    'Maple': [['Black', 'Satin'], ['Buttercream', 'Satin'], ['Cannonball', 'Satin'], ['Celeste', 'Satin'], ['Daydream', 'Satin'], ['Dove White', 'Satin'], ['Garden Gate', 'Satin'], ['Jodi Grey', 'Satin'], ['Khaki', 'Satin'], ['Raven', 'Satin'], ['Slate White', 'Satin'], ['Springhouse', 'Satin'], ['Stone', 'Satin'], ['Triton Blue', 'Satin'], ['Twilight', 'Satin'], ['Vista Grey', 'Satin'], ['Wandering Vine', 'Satin'], ['White', 'Satin'], ['White Sand', 'Satin']],
+                    'Hard Maple': [['Amber', 'Satin'], ['Coastal Blue', 'Satin'], ['Honey Spice', 'Satin'], ['Natural', 'Satin'], ['Nottingham', 'Matte'], ['Winter Wheat', 'Satin'], ['Shirebrook', 'Matte'], ['Warmington', 'Satin'], ['Whiskey Barrel', 'Satin'], ['Winchester', 'Satin'], ['Winter Sky', 'Satin']],
+                    'Walnut': [['Natural', 'Satin'], ['Whiskey Barrel', 'Satin'], ['Winchester', 'Satin'], ['Winter Wheat', 'Satin'], ['Thicket', 'Matte']],
+                    'Rift Cut White Oak': [['Bramble', 'Matte'], ['Chapelwood', 'Matte'], ['Highland', 'Matte'], ['Shady Grove', 'Matte'], ['Thicket', 'Matte']],
+                    'Summit': [['Appalachian Range', null], ['Dark Grey Woodland', null], ['Deep Ridge Trail', null], ['Elk Range', null], ['Forest Trail', null], ['Frosted Trail', null], ['Glacier Mountain', null], ['Light Grey Woodland', null], ['Light Woodland', null], ['Olympic Mountain', null], ['Rocky Mountain', null], ['Shadow Canyon', null], ['Teton Range', null], ['Weathered Woodland', null]],
+                    'Apex Oak': [['Double Fumed', null], ['Light Natural', null], ['Natural Copper', null], ['Patina Natural', null]]
+                },
+                customFinish: 'Custom Color Match',
+                customSpecies: 'Maple',
+                // species that restrict the door styles to a single slab option
+                speciesDoors: { 'Apex Oak': ['Apex Slab'], 'Summit': ['Summit Slab'] },
+                doorStyles: ['Abbey', 'Apollo', 'Austere', 'Brookside 1"', 'Chatham 1"', 'Contempo', 'Foundry', 'Gemini', 'Meadowbrook 1"', 'Millbrook 1"', 'Millbrook II 1"', 'Montauk 1"', 'Newport', 'Quaker', 'Shaker', 'Vesta 1"', 'Vintage', 'Vogue', 'Vogue 3"']
+            };
+            const DOOR_SELECT_NAMES = ['wall_door', 'base_door', 'shallow_drawer', 'deep_drawer'];
+
+            let active = false;
+            let snapshots = null;
+
+            function q(name) { return agreementForm.querySelector('select[name="' + name + '"]'); }
+
+            function hasOption(sel, val) {
+                for (let i = 0; i < sel.options.length; i++) {
+                    if (sel.options[i].value === val) return true;
+                }
+                return false;
+            }
+
+            function takeSnapshot() {
+                if (snapshots) return;
+                snapshots = { wood_specie: woodSpecieSelect.innerHTML };
+                DOOR_SELECT_NAMES.forEach(function (n) {
+                    const el = q(n);
+                    if (el) snapshots[n] = el.innerHTML;
+                });
+            }
+
+            function fillSelect(sel, placeholder, items, keepValue) {
+                const prev = keepValue ? sel.value : '';
+                sel.innerHTML = '';
+                const ph = document.createElement('option');
+                ph.value = '';
+                ph.textContent = placeholder;
+                sel.appendChild(ph);
+                items.forEach(function (v) {
+                    const o = document.createElement('option');
+                    o.value = v;
+                    o.textContent = v;
+                    sel.appendChild(o);
+                });
+                sel.value = (prev && hasOption(sel, prev)) ? prev : '';
+                togglePlaceholderClass(sel);
+            }
+
+            function finishesFor(species) { return DATA.finishes[species] || []; }
+
+            function doorStylesFor(species) { return DATA.speciesDoors[species] || DATA.doorStyles; }
+
+            function updateDoors() {
+                const list = doorStylesFor(woodSpecieSelect.value);
+                DOOR_SELECT_NAMES.forEach(function (n) {
+                    const el = q(n);
+                    if (el) fillSelect(el, 'Select Door Style', list, true);
+                });
+            }
+
+            function sheenFor(species, finish) {
+                const list = finishesFor(species);
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i][0] === finish) return list[i][1];
+                }
+                return null;
+            }
+
+            function populateFinish() {
+                const species = woodSpecieSelect.value;
+                const prev = finishDropdown.value;
+                finishDropdown.innerHTML = '';
+                const ph = document.createElement('option');
+                ph.value = '';
+                ph.textContent = species ? 'Select Finish' : 'Select Wood Specie First';
+                finishDropdown.appendChild(ph);
+                if (species) {
+                    finishesFor(species).forEach(function (pair) {
+                        const o = document.createElement('option');
+                        o.value = pair[0];
+                        o.textContent = pair[1] ? pair[0] + ' (' + pair[1] + ')' : pair[0];
+                        finishDropdown.appendChild(o);
+                    });
+                    if (species === DATA.customSpecies) {
+                        const co = document.createElement('option');
+                        co.value = DATA.customFinish;
+                        co.textContent = DATA.customFinish + ' (Custom shade)';
+                        finishDropdown.appendChild(co);
+                    }
+                }
+                finishDropdown.value = (prev && hasOption(finishDropdown, prev)) ? prev : '';
+                togglePlaceholderClass(finishDropdown);
+                updateDoors();
+                populateSheen();
+            }
+
+            function populateSheen() {
+                const species = woodSpecieSelect.value;
+                const finish = finishDropdown.value;
+                sheenDropdown.innerHTML = '';
+                if (!finish) {
+                    const ph = document.createElement('option');
+                    ph.value = '';
+                    ph.textContent = 'Select Wood Specie and Finish First';
+                    sheenDropdown.appendChild(ph);
+                    sheenDropdown.value = '';
+                    sheenDropdown.disabled = true;
+                    togglePlaceholderClass(sheenDropdown);
+                    return;
+                }
+                if (finish === DATA.customFinish) {
+                    const ph = document.createElement('option');
+                    ph.value = '';
+                    ph.textContent = 'Custom - specify in notes';
+                    sheenDropdown.appendChild(ph);
+                    sheenDropdown.value = '';
+                    sheenDropdown.disabled = true;
+                    togglePlaceholderClass(sheenDropdown);
+                    return;
+                }
+                const sheen = sheenFor(species, finish);
+                if (sheen) {
+                    const o = document.createElement('option');
+                    o.value = sheen;
+                    o.textContent = sheen;
+                    sheenDropdown.appendChild(o);
+                    sheenDropdown.value = sheen;
+                    sheenDropdown.disabled = false;
+                } else {
+                    const ph = document.createElement('option');
+                    ph.value = '';
+                    ph.textContent = 'N/A for this finish';
+                    sheenDropdown.appendChild(ph);
+                    sheenDropdown.value = '';
+                    sheenDropdown.disabled = true;
+                }
+                togglePlaceholderClass(sheenDropdown);
+            }
+
+            function apply() {
+                takeSnapshot();
+                active = true;
+                fillSelect(woodSpecieSelect, 'Select Wood Specie', DATA.species, true);
+                populateFinish();
+            }
+
+            function restore() {
+                if (!active) return;
+                active = false;
+                if (snapshots) {
+                    woodSpecieSelect.innerHTML = snapshots.wood_specie;
+                    DOOR_SELECT_NAMES.forEach(function (n) {
+                        const el = q(n);
+                        if (el && snapshots[n] != null) el.innerHTML = snapshots[n];
+                    });
+                }
+                sheenDropdown.disabled = false;
+                togglePlaceholderClass(woodSpecieSelect);
+                DOOR_SELECT_NAMES.forEach(function (n) { const el = q(n); if (el) togglePlaceholderClass(el); });
+                updateFinishOptions();
+            }
+
+            function sync() {
+                if (richlandToggle && richlandToggle.checked) {
+                    apply();
+                } else {
+                    restore();
+                }
+            }
+
+            return {
+                apply: apply,
+                restore: restore,
+                sync: sync,
+                isActive: function () { return active; },
+                populateFinish: populateFinish,
+                populateSheen: populateSheen
+            };
+        })();
+
         // Initialize editable text fields
         textFields.forEach(function (field) {
             field.setAttribute('contenteditable', 'true');
@@ -1473,19 +1692,8 @@
             }
         });
 
-        function updateProductLineMutualExclusion() {
-            const faceFrameSelected = faceFrameToggle && faceFrameToggle.checked;
-            const framelessSelected = framelessToggle && framelessToggle.checked;
-            if (faceFrameToggle) {
-                faceFrameToggle.disabled = framelessSelected;
-            }
-            if (framelessToggle) {
-                framelessToggle.disabled = faceFrameSelected;
-            }
-        }
-
         function updateFramelessOptionsState() {
-            const framelessSelected = framelessToggle && framelessToggle.checked;
+            const framelessSelected = (framelessToggle && framelessToggle.checked) || (richlandToggle && richlandToggle.checked);
             const melamineBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="frameless_interior"]');
 
             if (framelessOptions) {
@@ -1504,7 +1712,6 @@
             const faceFrameSelected = faceFrameToggle && faceFrameToggle.checked;
             const faceFrameBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_style"]');
             const faceFrameInteriorBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_interior"]');
-            const faceFrameOverlayBoxes = agreementForm.querySelectorAll('input[type="checkbox"][name="face_frame_overlay"]');
 
             if (faceFrameOptions) {
                 faceFrameOptions.classList.toggle('disabled', !faceFrameSelected);
@@ -1518,13 +1725,6 @@
             });
 
             faceFrameInteriorBoxes.forEach(function (box) {
-                box.disabled = !faceFrameSelected;
-                if (!faceFrameSelected) {
-                    box.checked = false;
-                }
-            });
-
-            faceFrameOverlayBoxes.forEach(function (box) {
                 box.disabled = !faceFrameSelected;
                 if (!faceFrameSelected) {
                     box.checked = false;
@@ -1555,7 +1755,6 @@
             });
             updateFaceFrameOptionsState();
             updateFramelessOptionsState();
-            updateProductLineMutualExclusion();
             submitBtn.disabled = false;
         }
 
@@ -1598,7 +1797,7 @@
 
         function buildAgreementBody() {
             return [
-                'Plain & Fancy Trade Partner - Estimate / Order / Designer Express Ordering Process',
+                'Plain & Fancy Trade Partner - Estimate / Order / Designer Assist Ordering Process',
                 '',
                 'Client Details',
                 'Client Name: ' + formatValue(getFieldValue('client_name')),
@@ -1613,7 +1812,7 @@
                 '',
                 'Product Line',
                 'Product Line: ' + formatValue(getCheckedLabels('product_line').join(', ')),
-                'Face Frame Thickness: ' + formatValue(getCheckedLabels('face_frame_style').join(', ')),
+                'Face Frame Type: ' + formatValue(getCheckedLabels('face_frame_style').join(', ')),
                 'Face Frame Interior: ' + formatValue(getCheckedLabels('face_frame_interior').join(', ')),
                 'Frameless Interior: ' + formatValue(getCheckedLabels('frameless_interior').join(', ')),
                 '',
@@ -1651,7 +1850,7 @@
             const serviceLabels = {
                 'Cost Estimate': 'COST ESTIMATE',
                 'Your Design, Our Order Documents': 'YOUR DESIGN, OUR ORDER DOCUMENTS',
-                'Designer Express Ordering Process': 'DESIGNER EXPRESS'
+                'Designer Assist Ordering Process': 'DESIGNER ASSIST'
             };
             const selectedServices = getCheckedLabels('services')
                 .map(function (lbl) { return serviceLabels[lbl] || lbl.toUpperCase(); });
@@ -1682,16 +1881,14 @@
         });
 
         if (faceFrameToggle) {
-            faceFrameToggle.addEventListener('change', function () {
-                updateFaceFrameOptionsState();
-                updateProductLineMutualExclusion();
-            });
+            faceFrameToggle.addEventListener('change', updateFaceFrameOptionsState);
         }
         if (framelessToggle) {
-            framelessToggle.addEventListener('change', function () {
-                updateFramelessOptionsState();
-                updateProductLineMutualExclusion();
-            });
+            framelessToggle.addEventListener('change', updateFramelessOptionsState);
+        }
+        if (richlandToggle) {
+            richlandToggle.addEventListener('change', updateFramelessOptionsState);
+            richlandToggle.addEventListener('change', function () { RichlandCascade.sync(); });
         }
         if (woodSpecieSelect) {
             woodSpecieSelect.addEventListener('change', updateFinishOptions);
@@ -1719,8 +1916,8 @@
 
         updateFaceFrameOptionsState();
         updateFramelessOptionsState();
-        updateProductLineMutualExclusion();
         updateFinishOptions();
+        RichlandCascade.sync();
 
         // Reset handler
         resetBtn.addEventListener('click', function () {
@@ -1739,7 +1936,7 @@
                 });
                 updateFaceFrameOptionsState();
                 updateFramelessOptionsState();
-                updateProductLineMutualExclusion();
+                RichlandCascade.sync();
                 updateFinishOptions();
             }
         });
